@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'features/test/test_view.dart';
+import 'features/test/test_view_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => TestViewModel()),
+    ],
+    child: const MyApp(),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
