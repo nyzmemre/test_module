@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
 
+import '../result/result_view.dart';
 import 'test_view_model.dart';
 
 class TestView extends StatelessWidget {
@@ -17,33 +18,41 @@ class TestView extends StatelessWidget {
         body: Consumer<TestViewModel>(
           builder: (context, testProvider, _)
             {
-              return Column(
-                      children: [
-                        Image.asset(imageList[testProvider.index]),
-                        context.sized.emptySizedHeightBoxLow,
+              if(imageList.length>testProvider.index)
+                {
+                  return Column(
+                    children: [
+                      Image.asset(imageList[testProvider.index]),
+                      context.sized.emptySizedHeightBoxLow,
+                      (testProvider.isClickAnsw) ? indexBar( testProvider.decreaseIndex, testProvider.increaseIndex) : SizedBox(),
+                      context.sized.emptySizedHeightBoxLow,
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                answButton(context, 'A', testProvider.index,testProvider.increaseIndex, trueAnswer),
-                                context.sized.emptySizedHeightBoxLow,
-                                answButton(context, 'B', testProvider.index,testProvider.increaseIndex, trueAnswer),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                answButton(context, 'C', testProvider.index, testProvider.increaseIndex,trueAnswer),
-                                context.sized.emptySizedHeightBoxLow,
-                                answButton(context, 'D', testProvider.index, testProvider.increaseIndex,trueAnswer),
-                              ],
-                            ),
-                          ],
-                        )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              answButton(context,testProvider.isClickAnsw, 'A', testProvider.index,testProvider.clickAnswButton, trueAnswer),
+                              context.sized.emptySizedHeightBoxLow,
+                              answButton(context,testProvider.isClickAnsw, 'B', testProvider.index,testProvider.clickAnswButton, trueAnswer),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              answButton(context,testProvider.isClickAnsw, 'C', testProvider.index, testProvider.clickAnswButton,trueAnswer),
+                              context.sized.emptySizedHeightBoxLow,
+                              answButton(context,testProvider.isClickAnsw, 'D', testProvider.index, testProvider.clickAnswButton,trueAnswer),
+                            ],
+                          ),
+                        ],
+                      )
 
-                      ],
-                    );
+                    ],
+                  );
+                } else{
+                return ResultView();
+              }
+
 
             }
         ),
@@ -51,18 +60,35 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(BuildContext context, String buttonName, int index, Function func, List<String> trueAnswer) {
+  Container answButton(BuildContext context,bool isClick, String buttonName, int index, Function func, List<String> trueAnswer) {
     return Container(
                        width: context.sized.width * .4,
-                       child: ElevatedButton(onPressed: (){
+                       child: ElevatedButton(onPressed: (isClick)? (){}: (){
                          if(buttonName==trueAnswer[index]){
                            print('doğru');
                            func();
-
                          } else {
+                           func();
                            print('yanlış');
-                           func();                         }
+                         }
                        }, child: Text(buttonName)));
+  }
+
+  Widget indexBar(Function arrowFunction, Function previousFunction){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        IconButton(onPressed:(){
+          arrowFunction();
+        }, icon: Icon(Icons.arrow_back_ios_new)),
+        ElevatedButton(onPressed: (){}, child: Text('Çözüm')),
+        IconButton(onPressed: (){
+          previousFunction();
+        }, icon: Icon(Icons.arrow_forward_ios)),
+
+
+      ],
+    );
   }
 
 
