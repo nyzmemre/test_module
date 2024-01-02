@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:test_module/product/utility/constants/color_constants.dart';
 
 import '../result/result_view.dart';
 import 'test_view_model.dart';
@@ -32,16 +33,16 @@ class TestView extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              answButton(context,testProvider.isClickAnsw, 'A', testProvider.index,testProvider.clickAnswButton, trueAnswer),
+                              answButton(context,testProvider.isClickAnsw, 'A', testProvider.index,testProvider.scoreCounter, trueAnswer,testProvider.btnColor),
                               context.sized.emptySizedHeightBoxLow,
-                              answButton(context,testProvider.isClickAnsw, 'B', testProvider.index,testProvider.clickAnswButton, trueAnswer),
+                              answButton(context,testProvider.isClickAnsw, 'B', testProvider.index,testProvider.scoreCounter, trueAnswer,testProvider.btnColor),
                             ],
                           ),
                           Column(
                             children: [
-                              answButton(context,testProvider.isClickAnsw, 'C', testProvider.index, testProvider.clickAnswButton,trueAnswer),
+                              answButton(context,testProvider.isClickAnsw, 'C', testProvider.index, testProvider.scoreCounter,trueAnswer,testProvider.btnColor),
                               context.sized.emptySizedHeightBoxLow,
-                              answButton(context,testProvider.isClickAnsw, 'D', testProvider.index, testProvider.clickAnswButton,trueAnswer),
+                              answButton(context,testProvider.isClickAnsw, 'D', testProvider.index, testProvider.scoreCounter,trueAnswer,testProvider.btnColor),
                             ],
                           ),
                         ],
@@ -60,18 +61,17 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(BuildContext context,bool isClick, String buttonName, int index, Function func, List<String> trueAnswer) {
+  Container answButton(BuildContext context, bool isClick, String buttonName, int index, Function(String, String)  func, List<String> trueAnswer, Color btnColor) {
     return Container(
                        width: context.sized.width * .4,
                        child: ElevatedButton(onPressed: (isClick)? (){}: (){
-                         if(buttonName==trueAnswer[index]){
-                           print('doğru');
-                           func();
-                         } else {
-                           func();
-                           print('yanlış');
-                         }
-                       }, child: Text(buttonName)));
+                        func(buttonName, trueAnswer[index]);
+                       }, child: Text(buttonName, style: TextStyle(color: (isClick) ? Colors.white : Colors.black),),
+                       style: ElevatedButton.styleFrom(
+                         backgroundColor: btnColor
+
+                       ),
+                       ));
   }
 
   Widget indexBar(Function arrowFunction, Function previousFunction){
