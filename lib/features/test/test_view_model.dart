@@ -37,10 +37,11 @@ class TestViewModel extends ChangeNotifier {
       notifyListeners();
     }
 
-    void scoreCounter(String trueAnswer, String userAnswer){
+    void scoreCounter(String trueAnswer, String userAnswer, int selectedIndex){
       if(trueAnswer==userAnswer){
         _trueCounter++;
         _btnColor=ColorConstants.trueAnswerCOLOR;
+
         print(_trueCounter);
         clickAnswButton();
       }else {

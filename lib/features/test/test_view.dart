@@ -33,16 +33,16 @@ class TestView extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              answButton(context,testProvider.isClickAnsw, 'A', testProvider.index,testProvider.scoreCounter, trueAnswer,testProvider.btnColor),
+                              answButton(context,testProvider.isClickAnsw, 'A', testProvider.index, trueAnswer,testProvider.btnColor),
                               context.sized.emptySizedHeightBoxLow,
-                              answButton(context,testProvider.isClickAnsw, 'B', testProvider.index,testProvider.scoreCounter, trueAnswer,testProvider.btnColor),
+                              answButton(context,testProvider.isClickAnsw, 'B', testProvider.index, trueAnswer,testProvider.btnColor),
                             ],
                           ),
                           Column(
                             children: [
-                              answButton(context,testProvider.isClickAnsw, 'C', testProvider.index, testProvider.scoreCounter,trueAnswer,testProvider.btnColor),
+                              answButton(context,testProvider.isClickAnsw, 'C', testProvider.index,trueAnswer,testProvider.btnColor),
                               context.sized.emptySizedHeightBoxLow,
-                              answButton(context,testProvider.isClickAnsw, 'D', testProvider.index, testProvider.scoreCounter,trueAnswer,testProvider.btnColor),
+                              answButton(context,testProvider.isClickAnsw, 'D', testProvider.index,trueAnswer,testProvider.btnColor),
                             ],
                           ),
                         ],
@@ -61,14 +61,14 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(BuildContext context, bool isClick, String buttonName, int index, Function(String, String)  func, List<String> trueAnswer, Color btnColor) {
+  Container answButton(BuildContext context, bool isClick, String buttonName, int index, List<String> trueAnswer, Color btnColor) {
     return Container(
                        width: context.sized.width * .4,
                        child: ElevatedButton(onPressed: (isClick)? (){}: (){
-                        func(buttonName, trueAnswer[index]);
-                       }, child: Text(buttonName, style: TextStyle(color: (isClick) ? Colors.white : Colors.black),),
+                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(trueAnswer[index], buttonName, index);
+                       }, child: Text(buttonName, style: TextStyle(color: (isClick && buttonName==trueAnswer[index]) ? Colors.white : Colors.black),),
                        style: ElevatedButton.styleFrom(
-                         backgroundColor: btnColor
+                         backgroundColor: (buttonName==trueAnswer[index]) ? btnColor : ColorConstants.white
 
                        ),
                        ));
