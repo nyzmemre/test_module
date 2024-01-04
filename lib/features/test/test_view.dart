@@ -26,6 +26,16 @@ class TestView extends StatelessWidget {
                   return SingleChildScrollView(
                     child: Column(
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Doğru: ${testProvider.trueCounter}'),
+                            context.sized.emptySizedWidthBoxNormal,
+                            Text('Yanlış: ${testProvider.falseCounter}'),
+                          ],
+                        ),
+                        context.sized.emptySizedHeightBoxLow,
+                        context.sized.emptySizedHeightBoxLow,
                         Image.asset(attentionQuestions.attentionQuesList[testProvider.index].quessImagePath),
                         context.sized.emptySizedHeightBoxLow,
                         (testProvider.isClickAnsw) ? indexBar( testProvider.decreaseIndex, testProvider.increaseIndex) : SizedBox(),
@@ -65,15 +75,15 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(BuildContext context, bool isClick, String trueAnswer,String buttonName, int index,) {
+  Container answButton(BuildContext context, bool isClick, String trueAnswer,String buttonName, int selectedIndex,) {
 
     return Container(
                        width: context.sized.width * .4,
                        child: ElevatedButton(onPressed: (isClick)? (){}: (){
-                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(trueAnswer,buttonName, index);
+                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(trueAnswer,buttonName, selectedIndex);
                        }, child: Text(buttonName, style: TextStyle(color: Colors.black),),
                        style: ElevatedButton.styleFrom(
-                         backgroundColor: Provider.of<TestViewModel>(context, listen: false).bntColorList[index]
+                         backgroundColor: Provider.of<TestViewModel>(context, listen: false).bntColorList[selectedIndex]
 
                        ),
                        ));
