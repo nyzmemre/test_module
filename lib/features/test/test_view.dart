@@ -1,54 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:test_module/features/test/test_questions/attention_questions.dart';
 import 'package:test_module/product/utility/constants/color_constants.dart';
+import 'package:test_module/product/utility/constants/list_constants.dart';
 
 import '../result/result_view.dart';
 import 'test_view_model.dart';
 
 class TestView extends StatelessWidget {
-  const TestView({Key? key}) : super(key: key);
+   TestView({Key? key}) : super(key: key);
+
+  AttentionQuestions attentionQuestions=AttentionQuestions();
 
   @override
   Widget build(BuildContext context) {
-    List<String> answNameList=['A', 'B', 'C','D'];
-    List<String> imageList=['assets/quessImage/1.jpg','assets/quessImage/16.jpg','assets/quessImage/19.jpg'];
-    List<String> trueAnswer=['C', 'D','A'];
+
     return SafeArea(
       child: Scaffold(
         body: Consumer<TestViewModel>(
           builder: (context, testProvider, _)
             {
-              if(imageList.length>testProvider.index)
+              if(attentionQuestions.attentionQuesList.length>testProvider.index)
                 {
-                  return Column(
-                    children: [
-                      Image.asset(imageList[testProvider.index]),
-                      context.sized.emptySizedHeightBoxLow,
-                      (testProvider.isClickAnsw) ? indexBar( testProvider.decreaseIndex, testProvider.increaseIndex) : SizedBox(),
-                      context.sized.emptySizedHeightBoxLow,
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Image.asset(attentionQuestions.attentionQuesList[testProvider.index].quessImagePath),
+                        context.sized.emptySizedHeightBoxLow,
+                        (testProvider.isClickAnsw) ? indexBar( testProvider.decreaseIndex, testProvider.increaseIndex) : SizedBox(),
+                        context.sized.emptySizedHeightBoxLow,
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              answButton(context,testProvider.isClickAnsw, 'A', testProvider.index, trueAnswer,testProvider.btnColor),
-                              context.sized.emptySizedHeightBoxLow,
-                              answButton(context,testProvider.isClickAnsw, 'B', testProvider.index, trueAnswer,testProvider.btnColor),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              answButton(context,testProvider.isClickAnsw, 'C', testProvider.index,trueAnswer,testProvider.btnColor),
-                              context.sized.emptySizedHeightBoxLow,
-                              answButton(context,testProvider.isClickAnsw, 'D', testProvider.index,trueAnswer,testProvider.btnColor),
-                            ],
-                          ),
-                        ],
-                      )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[0], 0),
+                                context.sized.emptySizedHeightBoxLow,
+                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[2], 2),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[1], 1),
+                                context.sized.emptySizedHeightBoxLow,
+                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[3], 3),
+                              ],
+                            ),
+                          ],
+                        )
 
-                    ],
+                      ],
+                    ),
                   );
                 } else{
                 return ResultView();
@@ -61,14 +65,15 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(BuildContext context, bool isClick, String buttonName, int index, List<String> trueAnswer, Color btnColor) {
+  Container answButton(BuildContext context, bool isClick, String buttonName, int index,) {
+
     return Container(
                        width: context.sized.width * .4,
                        child: ElevatedButton(onPressed: (isClick)? (){}: (){
-                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(trueAnswer[index], buttonName, index);
-                       }, child: Text(buttonName, style: TextStyle(color: (isClick && buttonName==trueAnswer[index]) ? Colors.white : Colors.black),),
+                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(buttonName, index);
+                       }, child: Text(buttonName, style: TextStyle(color: Colors.black),),
                        style: ElevatedButton.styleFrom(
-                         backgroundColor: (buttonName==trueAnswer[index]) ? btnColor : ColorConstants.white
+                         backgroundColor: Colors.white
 
                        ),
                        ));
