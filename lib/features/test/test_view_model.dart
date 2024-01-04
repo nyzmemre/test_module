@@ -7,76 +7,56 @@ class TestViewModel extends ChangeNotifier {
     bool _isClickAnsw=false;
     int _trueCounter=0;
     int _falseCounter=0;
+    List<Color> bntColorList=List.generate(4, (index) => ColorConstants.white);
 
 
     void isClickAnswChange(){
       _isClickAnsw=!_isClickAnsw;
-
       notifyListeners();
     }
 
    void increaseIndex(){
       _index++;
-
+      isClickAnswChange();
+      bntColorList=List.generate(4, (index) => ColorConstants.white);
       notifyListeners();
     }
 
     void decreaseIndex(){
+
       if(_index!=0){
         _index--;
       } else{
         _index=_index;
       }
 
-
       notifyListeners();
     }
 
 
 
-    void scoreCounter( String userAnswer, int selectedIndex){
+    void scoreCounter(String trueAnswer, String userAnswer, int selectedIndex){
 
       isClickAnswChange();
-
-/*print(selectedIndex);
-      if(trueAnswer==userAnswer) {
-        _selectedBtnColor=ColorConstants.trueAnswerCOLOR;
-        _trueCounter++;
-        clickAnswButton(selectedIndex);
-      }else{
-        _selectedBtnColor=ColorConstants.falseAnswerCOLOR;
-        _btnColor=ColorConstants.trueAnswerCOLOR;
-
-        _falseCounter++;
-        clickAnswButton(selectedIndex);
-      }*/
-
-      /*  if(trueAnswer==userAnswer){
-          _trueCounter++;
-          clickAnswButton();
-          print(_trueCounter);
-
-        }else {
-          _falseCounter++;
-          clickAnswButton();
-          print(_falseCounter);
-
-        }*/
-
-     /* if(trueAnswer==userAnswer){
-        _trueCounter++;
-        _btnColor=ColorConstants.trueAnswerCOLOR;
-
-        print(_trueCounter);
-        clickAnswButton();
-      }else {
-        _falseCounter++;
-        _btnColor=ColorConstants.falseAnswerCOLOR;
-        print(_falseCounter);
-        clickAnswButton();
-      }*/
-print(isClickAnsw);
-
+     if(userAnswer==trueAnswer){
+       _trueCounter++;
+       bntColorList[selectedIndex]=ColorConstants.trueAnswerCOLOR;
+     } else{
+       _falseCounter++;
+       bntColorList[selectedIndex]=ColorConstants.falseAnswerCOLOR;
+       int trueIndex=0;
+      switch(trueAnswer){
+        case 'B':
+          trueIndex=1;
+        case 'C':
+         trueIndex=2;
+        case 'D':
+          trueIndex=3;
+          break;
+      }
+      bntColorList[trueIndex]=ColorConstants.trueAnswerCOLOR;
+     }
+     print(_falseCounter);
       notifyListeners();
     }
 

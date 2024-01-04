@@ -36,16 +36,16 @@ class TestView extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[0], 0),
+                                answButton(context, testProvider.isClickAnsw, attentionQuestions.attentionQuesList[testProvider.index].quessAnsw,ListConstants.answerTextList[0], 0),
                                 context.sized.emptySizedHeightBoxLow,
-                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[2], 2),
+                                answButton(context, testProvider.isClickAnsw, attentionQuestions.attentionQuesList[testProvider.index].quessAnsw,ListConstants.answerTextList[2], 2),
                               ],
                             ),
                             Column(
                               children: [
-                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[1], 1),
+                                answButton(context, testProvider.isClickAnsw, attentionQuestions.attentionQuesList[testProvider.index].quessAnsw,ListConstants.answerTextList[1], 1),
                                 context.sized.emptySizedHeightBoxLow,
-                                answButton(context, testProvider.isClickAnsw, ListConstants.answerTextList[3], 3),
+                                answButton(context, testProvider.isClickAnsw, attentionQuestions.attentionQuesList[testProvider.index].quessAnsw,ListConstants.answerTextList[3], 3),
                               ],
                             ),
                           ],
@@ -65,15 +65,15 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(BuildContext context, bool isClick, String buttonName, int index,) {
+  Container answButton(BuildContext context, bool isClick, String trueAnswer,String buttonName, int index,) {
 
     return Container(
                        width: context.sized.width * .4,
                        child: ElevatedButton(onPressed: (isClick)? (){}: (){
-                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(buttonName, index);
+                        Provider.of<TestViewModel>(context, listen: false).scoreCounter(trueAnswer,buttonName, index);
                        }, child: Text(buttonName, style: TextStyle(color: Colors.black),),
                        style: ElevatedButton.styleFrom(
-                         backgroundColor: Colors.white
+                         backgroundColor: Provider.of<TestViewModel>(context, listen: false).bntColorList[index]
 
                        ),
                        ));
