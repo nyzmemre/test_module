@@ -65,7 +65,7 @@ class TestView extends StatelessWidget {
                     ),
                   );
                 } else{
-                return ResultView();
+                return ResultView(trueCounter: testProvider.trueCounter, falseCounter: testProvider.falseCounter);
               }
 
 
