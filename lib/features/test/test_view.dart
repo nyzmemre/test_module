@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
 import 'package:test_module/product/utility/constants/color_constants.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
+import 'package:test_module/product/widgets/my_scaffold.dart';
 
 import '../result/result_view.dart';
 import 'test_view_model.dart';
@@ -17,8 +18,8 @@ class TestView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return SafeArea(
-      child: Scaffold(
-        body: Consumer<TestViewModel>(
+      child: MyScaffold(
+        child: Consumer<TestViewModel>(
           builder: (context, testProvider, _)
             {
               if(attentionQuestions.attentionQuesList.length>testProvider.index)
