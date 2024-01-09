@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
 import 'package:test_module/product/utility/constants/color_constants.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
+import 'package:test_module/product/utility/constants/text_constant.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 
 import '../result/result_view.dart';
@@ -30,9 +31,9 @@ class TestView extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Doğru: ${testProvider.trueCounter}'),
+                            Text('${TextConstant.trueTEXT}: ${testProvider.trueCounter}'),
                             context.sized.emptySizedWidthBoxNormal,
-                            Text('Yanlış: ${testProvider.falseCounter}'),
+                            Text('${TextConstant.falseTEXT}: ${testProvider.falseCounter}'),
                           ],
                         ),
                         context.sized.emptySizedHeightBoxLow,
@@ -84,7 +85,7 @@ class TestView extends StatelessWidget {
                         Provider.of<TestViewModel>(context, listen: false).scoreCounter(trueAnswer,buttonName, selectedIndex);
                        }, child: Text(buttonName, style: TextStyle(color: Colors.black),),
                        style: ElevatedButton.styleFrom(
-                         backgroundColor: Provider.of<TestViewModel>(context, listen: false).bntColorList[selectedIndex]
+                         backgroundColor: Provider.of<TestViewModel>(context, listen: false).btnColorList[selectedIndex]
 
                        ),
                        ));
@@ -96,11 +97,11 @@ class TestView extends StatelessWidget {
       children: [
         IconButton(onPressed:(){
           arrowFunction();
-        }, icon: Icon(Icons.arrow_back_ios_new)),
-        ElevatedButton(onPressed: (){}, child: Text('Çözüm')),
+        }, icon: const Icon(Icons.arrow_back_ios_new)),
+        ElevatedButton(onPressed: (){}, child: const Text(TextConstant.solvedTEXT)),
         IconButton(onPressed: (){
           previousFunction();
-        }, icon: Icon(Icons.arrow_forward_ios)),
+        }, icon: const Icon(Icons.arrow_forward_ios)),
 
 
       ],
