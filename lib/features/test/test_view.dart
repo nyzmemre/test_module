@@ -63,7 +63,10 @@ class TestView extends StatelessWidget {
                               ],
                             ),
                           ],
-                        )
+                        ),
+                        context.sized.emptySizedHeightBoxLow,
+                        (attentionQuestions.attentionQuesList[testProvider.index].tip != null) ? tipButton(context, attentionQuestions.attentionQuesList[testProvider.index].tip) : SizedBox()
+
 
                       ],
                     ),
@@ -78,6 +81,10 @@ class TestView extends StatelessWidget {
       ),
     );
   }
+
+  IconButton tipButton(BuildContext context, String? tipText) => IconButton(onPressed: (){
+    showDialog(context: context, builder: (_)=> MyAlertDialog(tipText: tipText ?? ''));
+  }, icon: Icon(Icons.tips_and_updates_outlined));
 
   Container answButton(BuildContext context, bool isClick, String trueAnswer,String buttonName, int selectedIndex,) {
 
@@ -106,8 +113,6 @@ class TestView extends StatelessWidget {
         IconButton(onPressed: (){
           previousFunction();
         }, icon: const Icon(Icons.arrow_forward_ios)),
-
-
       ],
     );
   }
