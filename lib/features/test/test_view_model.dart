@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_module/product/utility/constants/color_constants.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
+import 'package:test_module/product/utility/constants/text_constant.dart';
 
 class TestViewModel extends ChangeNotifier {
   int _index = 0;
@@ -41,11 +42,11 @@ class TestViewModel extends ChangeNotifier {
       _btnColorList[selectedIndex] = ColorConstants.falseAnswerCOLOR;
       int trueIndex = 0;
       switch (trueAnswer) {
-        case 'B':
+        case TextConstant.answB:
           trueIndex = 1;
-        case 'C':
+        case TextConstant.answC:
           trueIndex = 2;
-        case 'D':
+        case TextConstant.answD:
           trueIndex = 3;
           break;
       }

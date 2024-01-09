@@ -2,7 +2,7 @@ class TestModel{
   String quessID;
   String quessImagePath;
   String quessCategory;
-  String quessGrade;
+  int quessGrade;
   String quessAnsw;
   int quessLevel;
   String? secondImagePath;
@@ -44,7 +44,7 @@ class TestModel{
         quessID: json['quessID'] as String,
         quessImagePath: json['quessImagePath'] as String,
         quessCategory: json['quessCategory'] as String,
-        quessGrade: json['quessGrade'] as String,
+        quessGrade: json['quessGrade'] as int,
         quessAnsw: json['quessAnsw'] as String,
         quessLevel: json['quessLevel'] as int,
         secondImagePath: json['secondImagePath'] as String?,

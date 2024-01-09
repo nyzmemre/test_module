@@ -5,9 +5,11 @@ import 'package:test_module/features/test/test_questions/attention_questions.dar
 import 'package:test_module/product/utility/constants/color_constants.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
 import 'package:test_module/product/utility/constants/text_constant.dart';
+import 'package:test_module/product/widgets/my_alert_dialog.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 
 import '../result/result_view.dart';
+import 'test_model.dart';
 import 'test_view_model.dart';
 
 class TestView extends StatelessWidget {
@@ -40,7 +42,7 @@ class TestView extends StatelessWidget {
                         context.sized.emptySizedHeightBoxLow,
                         Image.asset(attentionQuestions.attentionQuesList[testProvider.index].quessImagePath),
                         context.sized.emptySizedHeightBoxLow,
-                        (testProvider.isClickAnsw) ? indexBar( testProvider.decreaseIndex, testProvider.increaseIndex) : SizedBox(),
+                        (testProvider.isClickAnsw) ? indexBar(context, AttentionQuestions().attentionQuesList, testProvider.index, testProvider.decreaseIndex, testProvider.increaseIndex) : SizedBox(),
                         context.sized.emptySizedHeightBoxLow,
 
                         Row(
@@ -91,14 +93,16 @@ class TestView extends StatelessWidget {
                        ));
   }
 
-  Widget indexBar(Function arrowFunction, Function previousFunction){
+  Widget indexBar(BuildContext context, List<TestModel> list, int index, Function arrowFunction, Function previousFunction){
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         IconButton(onPressed:(){
           arrowFunction();
         }, icon: const Icon(Icons.arrow_back_ios_new)),
-        ElevatedButton(onPressed: (){}, child: const Text(TextConstant.solvedTEXT)),
+        ElevatedButton(onPressed: (list.isNotEmpty && list[index].solve!=null) ? (){
+            showDialog(context: context, builder: (_)=>MyAlertDialog( solveText: list[index].solve));
+        } : null, child: const Text(TextConstant.solvedTEXT)),
         IconButton(onPressed: (){
           previousFunction();
         }, icon: const Icon(Icons.arrow_forward_ios)),
@@ -107,6 +111,8 @@ class TestView extends StatelessWidget {
       ],
     );
   }
+
+
 
 
 }
