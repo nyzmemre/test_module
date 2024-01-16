@@ -6,6 +6,6 @@ class TransitionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Visibility(child: Container());
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:test_module/product/utility/constants/color_constants.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
@@ -8,6 +10,8 @@ class TestViewModel extends ChangeNotifier {
   bool _isClickAnsw = false;
   int _trueCounter = 0;
   int _falseCounter = 0;
+  int? _second;
+  bool _isStop=false;
   List<Color> _btnColorList = List.generate(4, (index) => ColorConstants.white);
 
   void isClickAnswChange() {
@@ -56,6 +60,23 @@ class TestViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void imageVisibleChange(int? second) {
+    if (second != null) {
+      Future<void> timerFunction() async {
+        await Future.delayed(Duration(seconds: 1));
+        if (second == 0 && !_isStop) {
+          _second = second;
+          print(_second);
+          imageVisibleChange(second - 1);
+        }
+      }
+
+      timerFunction();
+    }
+    notifyListeners();
+  }
+
+
   int get index => _index;
 
   bool get isClickAnsw => _isClickAnsw;
@@ -63,6 +84,10 @@ class TestViewModel extends ChangeNotifier {
   int get trueCounter => _trueCounter;
 
   int get falseCounter => _falseCounter;
+
+  int? get second => _second;
+
+  bool get isStop => _isStop;
 
   List<Color> get btnColorList => _btnColorList;
 }

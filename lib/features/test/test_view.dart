@@ -41,6 +41,8 @@ class TestView extends StatelessWidget {
                             ],
                           ),
                           context.sized.emptySizedHeightBoxLow,
+                          (testProvider.second!=null) ? CircleAvatar(child: Text(testProvider.second.toString()),) : SizedBox(),
+                          context.sized.emptySizedHeightBoxLow,
                           context.sized.emptySizedHeightBoxLow,
                           Image.asset(attentionQuestions.attentionQuesList[testProvider.index].quessImagePath),
                           context.sized.emptySizedHeightBoxLow,
