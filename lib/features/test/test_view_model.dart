@@ -10,8 +10,7 @@ class TestViewModel extends ChangeNotifier {
   bool _isClickAnsw = false;
   int _trueCounter = 0;
   int _falseCounter = 0;
-  int? _second;
-  bool _isStop=false;
+  bool _isStop = false;
   List<Color> _btnColorList = List.generate(4, (index) => ColorConstants.white);
 
   void isClickAnswChange() {
@@ -23,6 +22,11 @@ class TestViewModel extends ChangeNotifier {
     _index++;
     isClickAnswChange();
     _btnColorList = List.generate(4, (index) => ColorConstants.white);
+    if (isStop) {
+      ///bunu yapma sebebim sonraki indexte saniye bilgisinin olup olmadığını bilmememdir.
+      ///eğer saniyeli soru değilse burayı isStop false kalmalıdır.
+      isStopChange();
+    }
     notifyListeners();
   }
 
@@ -60,22 +64,10 @@ class TestViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void imageVisibleChange(int? second) {
-    if (second != null) {
-      Future<void> timerFunction() async {
-        await Future.delayed(Duration(seconds: 1));
-        if (second == 0 && !_isStop) {
-          _second = second;
-          print(_second);
-          imageVisibleChange(second - 1);
-        }
-      }
-
-      timerFunction();
-    }
+  void isStopChange() {
+    _isStop = !_isStop;
     notifyListeners();
   }
-
 
   int get index => _index;
 
@@ -84,8 +76,6 @@ class TestViewModel extends ChangeNotifier {
   int get trueCounter => _trueCounter;
 
   int get falseCounter => _falseCounter;
-
-  int? get second => _second;
 
   bool get isStop => _isStop;
 
