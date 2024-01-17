@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
 import 'package:test_module/features/test/test_model.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
-import 'package:test_module/product/utility/constants/color_constants.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
 import 'package:test_module/product/utility/constants/text_constant.dart';
 import 'package:test_module/product/widgets/my_circle_second.dart';
@@ -28,8 +25,8 @@ class TestView extends StatelessWidget {
         child: Consumer<TestViewModel>(builder: (context, testProvider, _) {
           if (attentionQuestions.attentionQuesList.length >
               testProvider.index) {
-            List<TestModel> _testList = attentionQuestions.attentionQuesList;
-            int _currentIndex = testProvider.index;
+            List<TestModel> testList = attentionQuestions.attentionQuesList;
+            int currentIndex = testProvider.index;
 
             return SingleChildScrollView(
               child: Padding(
@@ -47,14 +44,14 @@ class TestView extends StatelessWidget {
                       ],
                     ),
                     context.sized.emptySizedHeightBoxLow,
-                    (_testList[_currentIndex].visibleTime != null &&
-                            _testList[_currentIndex].secondImagePath != null && !testProvider.isStop)
+                    (testList[currentIndex].visibleTime != null &&
+                            testList[currentIndex].secondImagePath != null && !testProvider.isStop)
                         ? MyCircleSecond(
-                            imageSecond: _testList[_currentIndex].visibleTime!, imageTimeCompletedFunc: testProvider.isStopChange,)
+                            imageSecond: testList[currentIndex].visibleTime!, imageTimeCompletedFunc: testProvider.isStopChange,)
                         : SizedBox(),
                     context.sized.emptySizedHeightBoxLow,
                     context.sized.emptySizedHeightBoxLow,
-                    (testProvider.isStop) ? Image.asset(_testList[_currentIndex].secondImagePath!) : Image.asset(_testList[_currentIndex].quessImagePath) ,
+                    (testProvider.isStop) ? Image.asset(testList[currentIndex].secondImagePath!) : Image.asset(testList[currentIndex].quessImagePath) ,
                     context.sized.emptySizedHeightBoxLow,
                     (testProvider.isClickAnsw)
                         ? MyIndexBar(
@@ -67,7 +64,7 @@ class TestView extends StatelessWidget {
                     ///bu kontrolü ekleme sebebim eğer soru saniyeli ise cevap kısmı gelmeden seçeneklere tıklamasını istemememdir.
                     ///ama soru saniyeli değilse seçenekler gelmeli. isStop saniyesi soruda sürekli false olacak.
                     ///bu yüzden sadece isStop yetmedi ve 2 değişken kontrolü kullandım.
-                    (_testList[_currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : Row(
+                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(
@@ -75,14 +72,14 @@ class TestView extends StatelessWidget {
                             answButton(
                                 context,
                                 testProvider.isClickAnsw,
-                                _testList[_currentIndex].quessAnsw,
+                                testList[currentIndex].quessAnsw,
                                 ListConstants.answerTextList[0],
                                 0),
                             context.sized.emptySizedHeightBoxLow,
                             answButton(
                                 context,
                                 testProvider.isClickAnsw,
-                                _testList[_currentIndex].quessAnsw,
+                                testList[currentIndex].quessAnsw,
                                 ListConstants.answerTextList[2],
                                 2),
                           ],
@@ -92,14 +89,14 @@ class TestView extends StatelessWidget {
                             answButton(
                                 context,
                                 testProvider.isClickAnsw,
-                                _testList[_currentIndex].quessAnsw,
+                                testList[currentIndex].quessAnsw,
                                 ListConstants.answerTextList[1],
                                 1),
                             context.sized.emptySizedHeightBoxLow,
                             answButton(
                                 context,
                                 testProvider.isClickAnsw,
-                                _testList[_currentIndex].quessAnsw,
+                                testList[currentIndex].quessAnsw,
                                 ListConstants.answerTextList[3],
                                 3),
                           ],
@@ -107,9 +104,9 @@ class TestView extends StatelessWidget {
                       ],
                     ),
                     context.sized.emptySizedHeightBoxLow,
-                    (_testList[_currentIndex].tip != null)
-                        ? MyTipButton(tipText: _testList[_currentIndex].tip)
-                        : SizedBox()
+                    (testList[currentIndex].tip != null)
+                        ? MyTipButton(tipText: testList[currentIndex].tip)
+                        : const SizedBox()
                   ],
                 ),
               ),
@@ -140,14 +137,14 @@ class TestView extends StatelessWidget {
                   Provider.of<TestViewModel>(context, listen: false)
                       .scoreCounter(trueAnswer, buttonName, selectedIndex);
                 },
-          child: Text(
-            buttonName,
-            style: TextStyle(color: Colors.black),
-          ),
           style: ElevatedButton.styleFrom(
               backgroundColor:
                   Provider.of<TestViewModel>(context, listen: false)
                       .btnColorList[selectedIndex]),
+          child: Text(
+            buttonName,
+            style: const TextStyle(color: Colors.black),
+          ),
         ));
   }
 }
