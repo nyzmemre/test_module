@@ -33,7 +33,7 @@ class _MyCircleSecondState extends State<MyCircleSecond> {
         _imageSecond--;
 
         if (_imageSecond == 0) {
-          // Burada sıfıra ulaşıldığında farklı bir işlem yapabilirsiniz
+          ///saniye sıfıra gelince fonksiyon çalışacak.
           widget.imageTimeCompletedFunc();
           timer.cancel();
 

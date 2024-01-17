@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'features/mascot/mascot_view.dart';
 import 'features/test/test_view.dart';
 import 'features/test/test_view_model.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  TestView(),
+      home:  MascotView(),
     );
   }
 }
