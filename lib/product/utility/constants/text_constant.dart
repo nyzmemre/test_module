@@ -23,4 +23,11 @@ class TextConstant{
   static const String easyCATEGORY='Basit';
   static const String normalCATEGORY='Orta';
   static const String difficultCATEGORY='Zor';
+
+  ///mascotTexts
+  static const String mascotText1='Merhaba, Hoşgeldin! Seninle keyifli zaman geçireceğiz. '
+      'Bu uygulama bir eğitim uygulamasıdır. '
+      'Seni daha yakından tanıyarak daha doğru ilerlemene yardımcı olmaya çalışacağım. '
+      'Haydi başlayalım.';
+  static const String mascotTextSelectClass='Sınıf seviyeni seç';
 }

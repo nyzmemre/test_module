@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:test_module/features/mascot/select_class/select_class_view.dart';
+import 'package:test_module/product/utility/constants/image_paths.dart';
+import 'package:test_module/product/utility/constants/text_constant.dart';
+import 'package:test_module/product/widgets/my_mascot_widget.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 import 'package:kartal/kartal.dart';
+
+import '../login/login_view.dart';
 
 class MascotView extends StatelessWidget {
   const MascotView({Key? key}) : super(key: key);
@@ -11,29 +17,18 @@ class MascotView extends StatelessWidget {
       child: Column(
         children: [
           context.sized.emptySizedHeightBoxHigh,
-      Container(
-        height: 100,
-      width: 300,
-      margin: const EdgeInsets.all(3.0),
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              blurRadius: .5,
-              spreadRadius: 1.0,
-              color: Colors.black.withOpacity(.12))
-        ],
-
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(5.0),
-            bottomLeft: Radius.circular(50.0),
-            bottomRight: Radius.circular(50.0),
-      ),),),
+      const MyMascotWidget(text: TextConstant.mascotText1),
           SizedBox(
               height: 300,
-              child: Image.asset('assets/appImage/mascot.png'))
+              child: Image.asset(ImagePaths.mascotImage)),
+          context.sized.emptySizedHeightBoxNormal,
+          ElevatedButton(onPressed: (){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SelectClassView()), (route) => false);
+          }, child: Text('Devam Et >'))
         ],
       ),
     ));
   }
+
+
 }
