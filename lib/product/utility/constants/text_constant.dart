@@ -30,4 +30,5 @@ class TextConstant{
       'Seni daha yakından tanıyarak daha doğru ilerlemene yardımcı olmaya çalışacağım. '
       'Haydi başlayalım.';
   static const String mascotTextSelectClass='Sınıf seviyeni seç';
+  static const String mascotTextBeforExamStatus='Daha önce sınava girdin mi?';
 }
