@@ -10,6 +10,20 @@ class TextConstant{
   static const String solveTEXT='Çözüm';
   static const String tipTEXT='İpucu';
   static const String exitTEXT='Kapat';
+  static const String login='Giriş';
+  static const String profile='Profil';
+  static const String signUp='Kayıt Ol';
+  static const String signIn='Giriş Yap';
+  static const String name='İsim';
+  static const String surname='Soyisim';
+  static const String password='Şifre';
+  static const String passwordAgain='Şifre Tekrar';
+  static const String hidePassword='Şifreyi gizle';
+  static const String showPassword='Şifreyi göster';
+  static const String mailAdress='Mail Adresi';
+  static const String or='----- Veya -----';
+
+
 
 
 
@@ -31,4 +45,18 @@ class TextConstant{
       'Haydi başlayalım.';
   static const String mascotTextSelectClass='Sınıf seviyeni seç';
   static const String mascotTextBeforExamStatus='Daha önce sınava girdin mi?';
+
+  ///form Error Texts
+  static const String notEmpty='alanı boş olamaz.';
+  static const String validateEmail='Lütfen geçerli bir mail adresi giriniz!';
+  static const String validatePassword='Lütfen şifrenizi giriniz!';
+  static const String passwordNotSame='Şifreleriniz aynı olmalıdır.';
+  static const String mailNotEmptyError='Mail adresi boş olamaz!';
+
+  ///Firebase Error Texts
+  static const String signInSuccesToast='Kaydınız başarıyla oluşturuldu.';
+  static const String passwordWeak='weak-password';
+  static const String passwordWeakToast='Lütfen daha güçlü bir parola seçiniz.';
+  static const String emailAlreadyUse='email-already-in-use';
+  static const String emailAlreadyUseToast='Email adresi zaten kullanılıyor.';
 }

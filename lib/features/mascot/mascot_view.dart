@@ -23,7 +23,7 @@ class MascotView extends StatelessWidget {
               child: Image.asset(ImagePaths.mascotImage)),
           context.sized.emptySizedHeightBoxNormal,
           ElevatedButton(onPressed: (){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>SelectClassView()), (route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>LoginView()), (route) => false);
           }, child: Text('Devam Et >'))
         ],
       ),

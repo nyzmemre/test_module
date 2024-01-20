@@ -5,6 +5,7 @@ import 'package:test_module/product/widgets/my_mascot_widget.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 import 'package:kartal/kartal.dart';
 
+///Sayfa Kullanılmıyor
 
 class StudentInfoPageBasic extends StatelessWidget {
   const StudentInfoPageBasic({Key? key, required this.buttonLength, required this.buttonTextList, required this.mascotText, required this.widget, required this.function}) : super(key: key);

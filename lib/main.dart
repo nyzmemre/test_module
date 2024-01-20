@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:test_module/firebase_options.dart';
 
+
+import 'package:test_module/features/login/login_view_model.dart';
+import 'firebase_options.dart';
 import 'features/mascot/mascot_view.dart';
 import 'features/test/test_view.dart';
 import 'features/test/test_view_model.dart';
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => TestViewModel()),
+      ChangeNotifierProvider(create: (_) => LoginViewModel()),
     ],
     child: const MyApp(),
   ),

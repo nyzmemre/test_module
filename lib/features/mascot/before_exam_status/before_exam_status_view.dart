@@ -4,6 +4,7 @@ import 'package:test_module/product/utility/constants/text_constant.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 import 'package:test_module/product/widgets/student_info_page_basic.dart';
 
+///Sayfa Kullanılmıyor
 class BeforeExamStatusView extends StatelessWidget {
   const BeforeExamStatusView({Key? key}) : super(key: key);
 

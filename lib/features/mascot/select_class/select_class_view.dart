@@ -7,6 +7,8 @@ import 'package:test_module/product/widgets/my_scaffold.dart';
 import 'package:kartal/kartal.dart';
 import 'package:test_module/product/widgets/student_info_page_basic.dart';
 
+
+///Sayfa Kullanılmıyor
 class SelectClassView extends StatelessWidget {
   const SelectClassView({Key? key}) : super(key: key);
 
