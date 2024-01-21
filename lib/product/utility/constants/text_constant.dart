@@ -52,6 +52,8 @@ class TextConstant{
   static const String validatePassword='Lütfen şifrenizi giriniz!';
   static const String passwordNotSame='Şifreleriniz aynı olmalıdır.';
   static const String mailNotEmptyError='Mail adresi boş olamaz!';
+  static const String beCareful='Dikkat';
+  static const String isInfoTrue='Bilgileri doğru girdiğinizden emin olun!';
 
   ///Firebase Error Texts
   static const String signInSuccesToast='Kaydınız başarıyla oluşturuldu.';

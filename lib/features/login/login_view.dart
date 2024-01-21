@@ -66,7 +66,7 @@ class LoginView extends StatelessWidget {
                   const Text(TextConstant.or),
                   context.sized.emptySizedHeightBoxLow,
                   TextButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignUpView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpView()));
                   }, child: const Text(TextConstant.signUp),
                   ),
                 ],
