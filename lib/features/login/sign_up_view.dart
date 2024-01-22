@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:motion_toast/motion_toast.dart';
@@ -95,17 +96,21 @@ class _SignUpViewState extends State<SignUpView> {
                               provider.buttonClickChange();
                               if (_key.currentState!.validate()) {
 
+await _loginViewModel.createUser(context, emailCtrl.text, passwordCtrl.text);
 
-                                  await _loginViewModel
-                                      .registerUserAndAddToFirestore(
-                                      context: context,
-                                    userName: nameCtrl.text,
-                                    userSurname: surnameCtrl.text,
-                                      email: emailCtrl.text,
-                                      password: passwordCtrl.text,
-                                    classGrade: 1
 
-                     );
+  await _loginViewModel
+      .registerUserAndAddToFirestore(
+      context: context,
+      userName: nameCtrl.text,
+      userSurname: surnameCtrl.text,
+      email: emailCtrl.text,
+      password: passwordCtrl.text,
+      classGrade: 1
+
+  );
+
+
                                 } else {
                                   MotionToast.error(
                                     title: const Text(TextConstant.beCareful),

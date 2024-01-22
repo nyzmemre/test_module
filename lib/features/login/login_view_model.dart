@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:test_module/features/homepage/homepage_view.dart';
 import 'package:test_module/features/login/email_verificiation.dart';
+import 'package:test_module/features/login/login_view.dart';
 import 'package:test_module/services/login_services.dart';
 
 class LoginViewModel extends ChangeNotifier {
@@ -28,14 +29,26 @@ class LoginViewModel extends ChangeNotifier {
   }
 
 
-  Future<void> singIn(String email, String password) async {
+  Future<void> singIn(BuildContext context, String email, String password) async {
     try {
       await loginServices.singIn(email, password);
     } on FirebaseAuthException catch (e) {
-      throw e;
+      MotionToast.error(description: Text(e.toString()), ).show(context);
     }
   }
 
+  Future<void> createUser(BuildContext context, String email, String password)async{
+    try{
+      await loginServices.createUser(email, password);
+
+
+    } catch (e){
+
+      MotionToast.error(
+          description: Text('Hata $e')).show(context);
+    }
+
+  }
   Future<void> registerUserAndAddToFirestore (
       {
       required BuildContext context,
@@ -46,28 +59,30 @@ class LoginViewModel extends ChangeNotifier {
       required int classGrade}) async {
     try {
       // Firebase Authentication ile kullanıcı oluşturma
-      await loginServices.createUser(email, password);
+      User? user= loginServices.firebaseAuth.currentUser;
+      String? uid = user?.uid;
+        print(uid);
+        // Firestore bağlantısı
+await sendEmailVerified();
+        await loginServices.firebaseFirestore.collection('users').doc(uid).set({
+          'userName': userName,
+          'userSurname': userSurname,
+          'email': email,
+          'classGrade': classGrade,
+        }); // Kullanıcı verilerini Firestore'a ekleme
 
-      // Oluşturulan kullanıcının UID'sini al
-      String uid = loginServices.getUserID() ?? '';
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>EmailVerificationScreen()));
+       /* MotionToast.success(
+          title: Text('Tebrikler'),
+          description: Text('Kayıt başarıyla olşturuldu.'),
+        ).show(context);*/
+        print('Kullanıcı başarıyla oluşturuldu ve Firestore\'a eklendi.');
 
-      // Firestore bağlantısı
-      FirebaseFirestore _firestore = loginServices.firebaseFirestore;
 
-      // Kullanıcı verilerini Firestore'a ekleme
-      await _firestore.collection('users').doc(uid).set({
-        'userName': userName,
-        'userSurname': userSurname,
-        'email': email,
-        'classGrade': classGrade,
-      });
 
-      MotionToast.success(
-        title: Text('Tebrikler'),
-        description: Text('Kayıt başarıyla olşturuldu.'),
-      ).show(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>EmailVerificationView()));
-      print('Kullanıcı başarıyla oluşturuldu ve Firestore\'a eklendi.');
+
+
+
     } catch (e) {
       MotionToast.error(
         title: Text('Hata'),
@@ -77,26 +92,32 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> sendEmailVerification () async {
+  Future<void> sendEmailVerified()async {
+    print('gitti');
     await loginServices.emailVerification();
   }
 
 
+
   Future<void> checkEmailVerified(BuildContext context) async {
-    await loginServices.firebaseAuth.currentUser?.reload();
-    await sendEmailVerification();
-
-      _isEmailVerified = loginServices.firebaseAuth.currentUser!.emailVerified;
-
-
-    if (_isEmailVerified) {
+      if (_isEmailVerified) {
       // TODO: implement your code after email verification
       MotionToast.success(
         title: Text('Tebrikler'),
-        description: Text("Email Successfully Verified"),
+        description: Text("Kaydınız tamamlandı, lütfen giriş yapınız."),
       ).show(context);
-
-    }
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginView()));
+    }else {
+     await loginServices.firebaseAuth.currentUser?.reload();
+     print(loginServices.firebaseAuth.currentUser?.uid);
+     if(loginServices.firebaseAuth.currentUser!=null) {
+       print('reload');
+       _isEmailVerified = loginServices.firebaseAuth.currentUser!.emailVerified;
+       print(_isEmailVerified);
+     } else {
+       sendEmailVerified();
+     }
+   }
   }
 
   bool get isVisible=>_isVisible;

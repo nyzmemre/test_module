@@ -8,7 +8,7 @@ class LoginServices {
 
   Future<void> createUser(String email, String password) async {
     try {
-      _firebaseAuth.createUserWithEmailAndPassword(
+     await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == TextConstant.passwordWeak) {
@@ -33,7 +33,11 @@ class LoginServices {
   }
 
   Future<void> emailVerification() async {
-    await _firebaseAuth.currentUser?.sendEmailVerification();
+    try{
+      await _firebaseAuth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch(e){
+      throw e;
+    }
   }
 
   FirebaseAuth get firebaseAuth => _firebaseAuth;

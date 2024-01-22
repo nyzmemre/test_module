@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:test_module/features/homepage/homepage_view.dart';
 
 import 'package:test_module/features/login/sign_up_view.dart';
 
@@ -59,7 +60,12 @@ class LoginView extends StatelessWidget {
                     );
                   }),
                   context.sized.emptySizedHeightBoxLow,
-                  ElevatedButton(onPressed: (){}, child: Text(TextConstant.signIn)),
+                  ElevatedButton(onPressed: ()async{
+                    await LoginViewModel().singIn(context, _emailCtrl.text, _passwordCtrl.text);
+
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>HomePageView()), (route) => false);
+
+                  }, child: Text(TextConstant.signIn)),
                   context.sized.emptySizedHeightBoxLow,
                   context.sized.emptySizedHeightBoxLow,
 
