@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:test_module/features/homepage/homepage_view.dart';
+import 'package:test_module/features/homepage/homepage_view_model.dart';
 import 'package:test_module/firebase_options.dart';
 
 
@@ -23,6 +25,7 @@ Future<void> main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => TestViewModel()),
       ChangeNotifierProvider(create: (_) => LoginViewModel()),
+      ChangeNotifierProvider(create: (_) => HomepageViewModel()),
     ],
     child: const MyApp(),
   ),
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  MascotView(),
+      home:  HomePageView(),
     );
   }
 }

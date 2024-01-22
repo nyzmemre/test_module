@@ -6,6 +6,20 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyScaffold(child: Center(child: Text('Homepage'),));
+    List<int> levelList=List.generate(20, (index) => index);
+    return MyScaffold(child: Center(child:SingleChildScrollView(
+      child: Column(
+        children: levelList.map((e) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: (){
+                print(e.toString());
+              },
+              child: CircleAvatar(child: Text(e.toString()),)),
+        )).toList()
+      ),
+    ),));
   }
 }

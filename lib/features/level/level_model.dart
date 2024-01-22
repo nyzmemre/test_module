@@ -36,10 +36,10 @@ class LevelModel {
 
   factory LevelModel.fromJson(Map<String, dynamic> json) {
     return LevelModel(
-      levelIndex: json['levelIndex'] as int?,
-      isLocked: json['isLocked'] as bool?,
-      levelPoint: json['levelPoint'] as int?,
-      userPoint: json['userPoint'] as int?,
+      levelIndex: json['levelIndex'] as int,
+      isLocked: json['isLocked'] as bool,
+      levelPoint: json['levelPoint'] as int,
+      userPoint: json['userPoint'] as int,
     );
   }
 
