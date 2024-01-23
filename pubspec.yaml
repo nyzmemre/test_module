@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   firebase_storage: ^11.6.0
   motion_toast: ^2.7.10
+  percent_indicator: ^4.0.1
 
 dev_dependencies:
   flutter_test:

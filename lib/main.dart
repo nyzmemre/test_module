@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:test_module/features/homepage/homepage_view.dart';
 import 'package:test_module/features/homepage/homepage_view_model.dart';
+import 'package:test_module/features/level/level_view.dart';
+import 'package:test_module/features/level/level_view_model.dart';
 import 'package:test_module/firebase_options.dart';
 
 
@@ -26,6 +28,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => TestViewModel()),
       ChangeNotifierProvider(create: (_) => LoginViewModel()),
       ChangeNotifierProvider(create: (_) => HomepageViewModel()),
+      ChangeNotifierProvider(create: (_) => LevelViewModel()),
     ],
     child: const MyApp(),
   ),
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  HomePageView(),
+      home:  LevelView(),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class ColorConstants{
   const ColorConstants._();
 
+  static const Color transparent=Colors.transparent;
   static const Color white=Colors.white;
   static const Color whiteAnswerCOLOR=Colors.white;
   static const Color trueAnswerCOLOR=Color(0xFF00AE5B);
