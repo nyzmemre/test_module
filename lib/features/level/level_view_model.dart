@@ -11,11 +11,13 @@ class LevelViewModel extends ChangeNotifier{
   ];
 
   isTestCompleted(int trueNum, int levelIndex){
-    if(trueNum>2) {
+    if(trueNum>_list[levelIndex].quesList.length*.7) {
       _list[levelIndex].isCompleted=true;
+
     }
-    print(_list);
+    _list[levelIndex].numOfCorrect=trueNum;
     notifyListeners();
+
   }
 
   List<LevelModel> get list=> _list;

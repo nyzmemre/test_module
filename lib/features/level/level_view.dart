@@ -5,7 +5,8 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:test_module/features/test/test_view.dart';
 import 'package:test_module/product/utility/constants/color_constants.dart';
-import 'package:test_module/product/widgets/level_circle_widget.dart';
+import 'package:test_module/product/widgets/my_level_circle_widget.dart';
+import 'package:test_module/product/widgets/my_level_linear_bar.dart';
 
 import '../../product/widgets/my_scaffold.dart';
 import '../test/test_view_model.dart';
@@ -48,38 +49,28 @@ class LevelView extends StatelessWidget {
                               : () {},
                           child: Row(
                             children: [
-                              LevelCircleWidget(
+                              MyLevelCircleWidget(
                                 index: index,
                                 isCompleted:
                                     levelProvider.list[index].isCompleted,
                               ),
                               context.sized.emptySizedWidthBoxNormal,
-                              Text('${index + 1} . Test')
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('${index + 1} . Test'),
+                                  (levelProvider.list[index].numOfCorrect!=null) ? Text('Son Çözüm Doğru Sayısı: ${levelProvider.list[index].numOfCorrect}') : SizedBox()
+                                ],
+                              ),
+                              context.sized.emptySizedWidthBoxNormal,
+
                             ],
                           )),
                       ((levelProvider.list.length - 1) == index)
                           ? SizedBox(
                               height: context.sized.width * .05,
                             )
-                          : Padding(
-                              padding: EdgeInsets.only(
-                                  left: (context.sized.height * .04) - 3),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: RotatedBox(
-                                  quarterTurns: -1,
-                                  child: LinearPercentIndicator(
-                                    percent: 1,
-                                    width: 50,
-                                    animation: true,
-                                    progressColor:
-                                        (levelProvider.list[index].isCompleted)
-                                            ? ColorConstants.trueAnswerCOLOR
-                                            : ColorConstants.falseAnswerCOLOR,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          : MyLevelLinearBar(isCompleted: levelProvider.list[index].isCompleted),
                     ],
                   ),
                 );
@@ -88,4 +79,6 @@ class LevelView extends StatelessWidget {
       },
     ));
   }
+
+
 }

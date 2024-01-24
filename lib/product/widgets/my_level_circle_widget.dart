@@ -4,8 +4,8 @@ import 'package:kartal/kartal.dart';
 
 import '../utility/constants/color_constants.dart';
 
-class LevelCircleWidget extends StatelessWidget {
-  const LevelCircleWidget({Key? key, required this.index, required this.isCompleted}) : super(key: key);
+class MyLevelCircleWidget extends StatelessWidget {
+  const MyLevelCircleWidget({Key? key, required this.index, required this.isCompleted}) : super(key: key);
   final int index;
   final bool isCompleted;
 

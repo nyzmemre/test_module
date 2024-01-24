@@ -6,9 +6,11 @@ import 'package:test_module/features/test/test_model.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
 import 'package:test_module/product/utility/constants/text_constant.dart';
+import 'package:test_module/product/widgets/my_answer_button.dart';
 import 'package:test_module/product/widgets/my_circle_second.dart';
 import 'package:test_module/product/widgets/my_index_bar.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
+import 'package:test_module/product/widgets/my_test_true_false_bar.dart';
 import 'package:test_module/product/widgets/my_tip_button.dart';
 
 import '../result/result_view.dart';
@@ -36,16 +38,7 @@ class TestView extends StatelessWidget {
                 padding: context.padding.normal,
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                            '${TextConstant.trueTEXT}: ${testProvider.trueCounter}'),
-                        context.sized.emptySizedWidthBoxNormal,
-                        Text(
-                            '${TextConstant.falseTEXT}: ${testProvider.falseCounter}'),
-                      ],
-                    ),
+                    MyTestTrueFalseBar(trueNum: testProvider.trueCounter, falseNum: testProvider.falseCounter),
                     context.sized.emptySizedHeightBoxLow,
                     (testList[currentIndex].visibleTime != null &&
                             testList[currentIndex].secondImagePath != null && !testProvider.isStop)
@@ -72,36 +65,32 @@ class TestView extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            answButton(
-                                context,
-                                testProvider.isClickAnsw,
-                                testList[currentIndex].quessAnsw,
-                                ListConstants.answerTextList[0],
-                                0),
+                            MyAnswerButton(
+                                isClick: testProvider.isClickAnsw,
+                                trueAnswer: testList[currentIndex].quessAnsw,
+                                buttonName: ListConstants.answerTextList[0],
+                                selectedIndex: 0),
                             context.sized.emptySizedHeightBoxLow,
-                            answButton(
-                                context,
-                                testProvider.isClickAnsw,
-                                testList[currentIndex].quessAnsw,
-                                ListConstants.answerTextList[2],
-                                2),
+                            MyAnswerButton(
+                                isClick: testProvider.isClickAnsw,
+                                trueAnswer: testList[currentIndex].quessAnsw,
+                                buttonName: ListConstants.answerTextList[2],
+                                selectedIndex: 2),
                           ],
                         ),
                         Column(
                           children: [
-                            answButton(
-                                context,
-                                testProvider.isClickAnsw,
-                                testList[currentIndex].quessAnsw,
-                                ListConstants.answerTextList[1],
-                                1),
+                            MyAnswerButton(
+                                isClick: testProvider.isClickAnsw,
+                                trueAnswer: testList[currentIndex].quessAnsw,
+                                buttonName: ListConstants.answerTextList[1],
+                                selectedIndex: 1),
                             context.sized.emptySizedHeightBoxLow,
-                            answButton(
-                                context,
-                                testProvider.isClickAnsw,
-                                testList[currentIndex].quessAnsw,
-                                ListConstants.answerTextList[3],
-                                3),
+                            MyAnswerButton(
+                                isClick: testProvider.isClickAnsw,
+                                trueAnswer: testList[currentIndex].quessAnsw,
+                                buttonName: ListConstants.answerTextList[3],
+                                selectedIndex: 3),
                           ],
                         ),
                       ],
@@ -126,30 +115,5 @@ class TestView extends StatelessWidget {
     );
   }
 
-  Container answButton(
-    BuildContext context,
-    bool isClick,
-    String trueAnswer,
-    String buttonName,
-    int selectedIndex,
-  ) {
-    return Container(
-        width: context.sized.width * .4,
-        child: ElevatedButton(
-          onPressed: (isClick)
-              ? () {}
-              : () {
-                  Provider.of<TestViewModel>(context, listen: false)
-                      .scoreCounter(trueAnswer, buttonName, selectedIndex);
-                },
-          style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  Provider.of<TestViewModel>(context, listen: false)
-                      .btnColorList[selectedIndex]),
-          child: Text(
-            buttonName,
-            style: const TextStyle(color: Colors.black),
-          ),
-        ));
-  }
+
 }
