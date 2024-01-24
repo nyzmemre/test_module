@@ -16,59 +16,76 @@ class LevelView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return MyScaffold(
-        child: Consumer2<TestViewModel, LevelViewModel>(
-          builder: (context, testProvider, levelProvider, _) {
-            return Center(
-              child: ListView.builder(
-                  itemCount: levelProvider.list.length,
-                  itemBuilder: (context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-
-                          InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>TestView(levelModel: levelProvider.list, testIndex: index)), (route) => false);
-                              },
-                              child: Row(
-                                children: [
-                                  LevelCircleWidget(index: index, isCompleted: levelProvider.list[index].isCompleted,),
-                                  context.sized.emptySizedWidthBoxNormal,
-                                  Text('${index + 1} . Test')
-                                ],
-                              )),
-
-                           ((levelProvider.list.length-1)==index) ? SizedBox(
-                            height: context.sized.width*.05,
-                          ) : Padding(
-                            padding: EdgeInsets.only(left:(context.sized.height*.04)-3 ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: RotatedBox(
-                                quarterTurns: -1,
-                                child: LinearPercentIndicator(
-                                  percent: 1,
-                                  width: 50,
-                                  animation: true,
-                                  progressColor: (levelProvider.list[index].isCompleted) ? ColorConstants.trueAnswerCOLOR : ColorConstants.falseAnswerCOLOR,
+    return MyScaffold(child: Consumer2<TestViewModel, LevelViewModel>(
+      builder: (context, testProvider, levelProvider, _) {
+        return Center(
+          child: ListView.builder(
+              itemCount: levelProvider.list.length,
+              itemBuilder: (context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          ///testin açılması için testin önceden tamamlanmış olması,
+                          ///indexinin sıfır olması veya
+                          ///önceki testin tamamlanmış olması gerekir.
+                          ///bu sıralama önemlidir. yoksa index hatası verir (index-1 koşulu 0 iken eksi olacağı için)
+                          onTap: (levelProvider.list[index].isCompleted ||
+                                  index == 0 ||
+                                  levelProvider.list[index - 1].isCompleted)
+                              ? () {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => TestView(
+                                              levelModel: levelProvider.list,
+                                              testIndex: index)),
+                                      (route) => false);
+                                }
+                              : () {},
+                          child: Row(
+                            children: [
+                              LevelCircleWidget(
+                                index: index,
+                                isCompleted:
+                                    levelProvider.list[index].isCompleted,
+                              ),
+                              context.sized.emptySizedWidthBoxNormal,
+                              Text('${index + 1} . Test')
+                            ],
+                          )),
+                      ((levelProvider.list.length - 1) == index)
+                          ? SizedBox(
+                              height: context.sized.width * .05,
+                            )
+                          : Padding(
+                              padding: EdgeInsets.only(
+                                  left: (context.sized.height * .04) - 3),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: RotatedBox(
+                                  quarterTurns: -1,
+                                  child: LinearPercentIndicator(
+                                    percent: 1,
+                                    width: 50,
+                                    animation: true,
+                                    progressColor:
+                                        (levelProvider.list[index].isCompleted)
+                                            ? ColorConstants.trueAnswerCOLOR
+                                            : ColorConstants.falseAnswerCOLOR,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-
-                        ],
-                      ),
-                    );
-                  }),
-            );
-          },
-        ));
+                    ],
+                  ),
+                );
+              }),
+        );
+      },
+    ));
   }
-
-
 }
