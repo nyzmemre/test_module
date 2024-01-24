@@ -60,41 +60,7 @@ class TestView extends StatelessWidget {
                     ///bu kontrolü ekleme sebebim eğer soru saniyeli ise cevap kısmı gelmeden seçeneklere tıklamasını istemememdir.
                     ///ama soru saniyeli değilse seçenekler gelmeli. isStop saniyesi soruda sürekli false olacak.
                     ///bu yüzden sadece isStop yetmedi ve 2 değişken kontrolü kullandım.
-                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            MyAnswerButton(
-                                isClick: testProvider.isClickAnsw,
-                                trueAnswer: testList[currentIndex].quessAnsw,
-                                buttonName: ListConstants.answerTextList[0],
-                                selectedIndex: 0),
-                            context.sized.emptySizedHeightBoxLow,
-                            MyAnswerButton(
-                                isClick: testProvider.isClickAnsw,
-                                trueAnswer: testList[currentIndex].quessAnsw,
-                                buttonName: ListConstants.answerTextList[2],
-                                selectedIndex: 2),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            MyAnswerButton(
-                                isClick: testProvider.isClickAnsw,
-                                trueAnswer: testList[currentIndex].quessAnsw,
-                                buttonName: ListConstants.answerTextList[1],
-                                selectedIndex: 1),
-                            context.sized.emptySizedHeightBoxLow,
-                            MyAnswerButton(
-                                isClick: testProvider.isClickAnsw,
-                                trueAnswer: testList[currentIndex].quessAnsw,
-                                buttonName: ListConstants.answerTextList[3],
-                                selectedIndex: 3),
-                          ],
-                        ),
-                      ],
-                    ),
+                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : answerButtons(testProvider, testList, currentIndex, context),
                     context.sized.emptySizedHeightBoxLow,
                     (testList[currentIndex].tip != null)
                         ? MyTipButton(tipText: testList[currentIndex].tip)
@@ -113,6 +79,44 @@ class TestView extends StatelessWidget {
         }),
       ),
     );
+  }
+
+  Row answerButtons(TestViewModel testProvider, List<TestModel> testList, int currentIndex, BuildContext context) {
+    return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          MyAnswerButton(
+                              isClick: testProvider.isClickAnsw,
+                              trueAnswer: testList[currentIndex].quessAnsw,
+                              buttonName: ListConstants.answerTextList[0],
+                              selectedIndex: 0),
+                          context.sized.emptySizedHeightBoxLow,
+                          MyAnswerButton(
+                              isClick: testProvider.isClickAnsw,
+                              trueAnswer: testList[currentIndex].quessAnsw,
+                              buttonName: ListConstants.answerTextList[2],
+                              selectedIndex: 2),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          MyAnswerButton(
+                              isClick: testProvider.isClickAnsw,
+                              trueAnswer: testList[currentIndex].quessAnsw,
+                              buttonName: ListConstants.answerTextList[1],
+                              selectedIndex: 1),
+                          context.sized.emptySizedHeightBoxLow,
+                          MyAnswerButton(
+                              isClick: testProvider.isClickAnsw,
+                              trueAnswer: testList[currentIndex].quessAnsw,
+                              buttonName: ListConstants.answerTextList[3],
+                              selectedIndex: 3),
+                        ],
+                      ),
+                    ],
+                  );
   }
 
 
