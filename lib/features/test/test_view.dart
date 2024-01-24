@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:test_module/features/level/level_model.dart';
 import 'package:test_module/features/test/test_model.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
@@ -14,18 +15,20 @@ import '../result/result_view.dart';
 import 'test_view_model.dart';
 
 class TestView extends StatelessWidget {
-  TestView({Key? key}) : super(key: key);
+  TestView({Key? key, required this.levelModel, required this.testIndex}) : super(key: key);
+  final List<LevelModel> levelModel;
+  final int testIndex;
 
-  AttentionQuestions attentionQuestions = AttentionQuestions();
+ // AttentionQuestions attentionQuestions = AttentionQuestions();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: MyScaffold(
         child: Consumer<TestViewModel>(builder: (context, testProvider, _) {
-          if (attentionQuestions.attentionQuesList.length >
+          if (levelModel[testIndex].quesList.length >
               testProvider.index) {
-            List<TestModel> testList = attentionQuestions.attentionQuesList;
+            List<TestModel> testList = levelModel[testIndex].quesList;
             int currentIndex = testProvider.index;
 
             return SingleChildScrollView(
@@ -114,7 +117,9 @@ class TestView extends StatelessWidget {
           } else {
             return ResultView(
                 trueCounter: testProvider.trueCounter,
-                falseCounter: testProvider.falseCounter);
+                falseCounter: testProvider.falseCounter,
+                testIndex: testIndex,
+            );
           }
         }),
       ),

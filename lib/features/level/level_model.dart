@@ -1,62 +1,65 @@
+import 'package:test_module/features/test/test_model.dart';
+
 class LevelModel {
-  int levelIndex;
-  bool isLocked;
-  int levelPoint;
-  int userPoint;
+  List<TestModel> quesList;
+  bool isCompleted;
+  int? numOfCorrect;
+  String? giftIconPath;
 
   LevelModel({
-   required this.levelIndex,
-   required this.isLocked,
-   required this.levelPoint,
-   required this.userPoint,
+    required this.quesList,
+    required  this.isCompleted,
+    this.numOfCorrect,
+    this.giftIconPath,
   });
 
   LevelModel copyWith({
-    int? levelIndex,
-    bool? isLocked,
-    int? levelPoint,
-    int? userPoint,
+   required List<TestModel> quesList,
+    required bool isCompleted,
+    int? numOfCorrect,
+    String? giftIconPath,
   }) {
     return LevelModel(
-      levelIndex: levelIndex ?? this.levelIndex,
-      isLocked: isLocked ?? this.isLocked,
-      levelPoint: levelPoint ?? this.levelPoint,
-      userPoint: userPoint ?? this.userPoint,
+      quesList: quesList,
+      isCompleted: isCompleted,
+      numOfCorrect: numOfCorrect ?? this.numOfCorrect,
+      giftIconPath: giftIconPath ?? this.giftIconPath,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'levelIndex': levelIndex,
-      'isLocked': isLocked,
-      'levelPoint': levelPoint,
-      'userPoint': userPoint,
+      'quesList': quesList,
+      'isCompleted': isCompleted,
+      'numOfCorrect': numOfCorrect,
+      'giftIconPath': giftIconPath,
     };
   }
 
   factory LevelModel.fromJson(Map<String, dynamic> json) {
     return LevelModel(
-      levelIndex: json['levelIndex'] as int,
-      isLocked: json['isLocked'] as bool,
-      levelPoint: json['levelPoint'] as int,
-      userPoint: json['userPoint'] as int,
+      quesList: json['quesList'] as List<TestModel>,
+      isCompleted: json['isCompleted'] as bool,
+      numOfCorrect: json['numOfCorrect'] as int?,
+      giftIconPath: json['giftIconPath'] as String?,
     );
   }
 
   @override
   String toString() =>
-      "LevelModel(levelIndex: $levelIndex,isLocked: $isLocked,levelPoint: $levelPoint,userPoint: $userPoint)";
+      "Response(quesList: $quesList,isCompleted: $isCompleted,numOfCorrect: $numOfCorrect,giftIconPath: $giftIconPath)";
 
   @override
-  int get hashCode => Object.hash(levelIndex, isLocked, levelPoint, userPoint);
+  int get hashCode =>
+      Object.hash(quesList, isCompleted, numOfCorrect, giftIconPath);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
           other is LevelModel &&
               runtimeType == other.runtimeType &&
-              levelIndex == other.levelIndex &&
-              isLocked == other.isLocked &&
-              levelPoint == other.levelPoint &&
-              userPoint == other.userPoint;
+              quesList == other.quesList &&
+              isCompleted == other.isCompleted &&
+              numOfCorrect == other.numOfCorrect &&
+              giftIconPath == other.giftIconPath;
 }

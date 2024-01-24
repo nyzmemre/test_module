@@ -69,6 +69,14 @@ class TestViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearTestCounters(){
+    _trueCounter=0;
+    _index=0;
+    _falseCounter=0;
+
+    notifyListeners();
+  }
+
   int get index => _index;
 
   bool get isClickAnsw => _isClickAnsw;
