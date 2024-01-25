@@ -3,6 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:kartal/kartal.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 
+
+
+///ithiyaçlar
+///tüm kelimeler girildikten sonra otomatik kontrol devreye girecek (onChanged de denetle, gelen kelime sayısını al. value.lenght e bak)
+///resfebe için model oluştur. gerekirse test modele ekle
+///her soru kalıbı için kolaylaştırılmış ekleme sayfası oluştur.
+///resfebe soruları geldiğinde farklı bir soru tipi çıkacak şekilde test_view de düzenleme yap.
 class ResfebeView extends StatelessWidget {
   const ResfebeView({Key? key}) : super(key: key);
 
