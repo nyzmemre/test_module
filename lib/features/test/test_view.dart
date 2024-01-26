@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
 import 'package:test_module/features/level/level_model.dart';
+import 'package:test_module/features/test/resfebe_view.dart';
 import 'package:test_module/features/test/test_model.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
 import 'package:test_module/product/utility/constants/list_constants.dart';
@@ -60,7 +61,7 @@ class TestView extends StatelessWidget {
                     ///bu kontrolü ekleme sebebim eğer soru saniyeli ise cevap kısmı gelmeden seçeneklere tıklamasını istemememdir.
                     ///ama soru saniyeli değilse seçenekler gelmeli. isStop saniyesi soruda sürekli false olacak.
                     ///bu yüzden sadece isStop yetmedi ve 2 değişken kontrolü kullandım.
-                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : answerButtons(testProvider, testList, currentIndex, context),
+                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : (testList[currentIndex].isResfebe!=null && testList[currentIndex].isResfebe!) ? ResfebeView(testList: testList, currentIndex: currentIndex) :answerButtons(testProvider, testList, currentIndex, context),
                     context.sized.emptySizedHeightBoxLow,
                     (testList[currentIndex].tip != null)
                         ? MyTipButton(tipText: testList[currentIndex].tip)
