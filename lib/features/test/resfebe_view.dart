@@ -28,7 +28,7 @@ class ResfebeView extends StatelessWidget {
               itemBuilder: (context, index) {
             return Row(
               children: [
-                letterTextForm(context, _controllerList[index]),
+                letterTextForm(context, _controllerList[index], _controllerList),
                 context.sized.emptySizedWidthBoxLow
               ],
             );
@@ -36,7 +36,7 @@ class ResfebeView extends StatelessWidget {
         );
   }
 
-  SizedBox letterTextForm(BuildContext context, TextEditingController controller) {
+  SizedBox letterTextForm(BuildContext context, TextEditingController controller, List<TextEditingController> controllerList) {
     return SizedBox(
                 width: 40,
                 height: 60,
@@ -50,13 +50,28 @@ class ResfebeView extends StatelessWidget {
                   onChanged: (value) {
                     if (value.length == 1) {
                       FocusScope.of(context).nextFocus();//whatever you want to do
+                    checkAnswer(context, controllerList);
                     }
                   },
+
 
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(1)
                   ],
                 ),
               );
+  }
+
+  void checkAnswer(BuildContext context, List<TextEditingController> controllerList) {
+    String typedWord = '';
+    for (TextEditingController controller in controllerList) {
+      typedWord += controller.text;
+    }
+
+    if (typedWord == testList[currentIndex].quessAnsw) {
+      print('true');
+    } else {
+      print('false');
+    }
   }
 }
