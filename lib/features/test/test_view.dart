@@ -61,7 +61,7 @@ class TestView extends StatelessWidget {
                     ///bu kontrolü ekleme sebebim eğer soru saniyeli ise cevap kısmı gelmeden seçeneklere tıklamasını istemememdir.
                     ///ama soru saniyeli değilse seçenekler gelmeli. isStop saniyesi soruda sürekli false olacak.
                     ///bu yüzden sadece isStop yetmedi ve 2 değişken kontrolü kullandım.
-                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : (testList[currentIndex].isResfebe!=null && testList[currentIndex].isResfebe!) ? ResfebeView(testList: testList, currentIndex: currentIndex) :answerButtons(testProvider, testList, currentIndex, context),
+                    (testList[currentIndex].visibleTime != null && !testProvider.isStop) ? SizedBox() : (testList[currentIndex].isResfebe!=null && testList[currentIndex].isResfebe!) ? ResfebeView(testList: testList, currentIndex: currentIndex, isTextFormsPassive: testProvider.isClickAnsw,) :answerButtons(testProvider, testList, currentIndex, context),
                     context.sized.emptySizedHeightBoxLow,
                     (testList[currentIndex].tip != null)
                         ? MyTipButton(tipText: testList[currentIndex].tip)
@@ -89,31 +89,43 @@ class TestView extends StatelessWidget {
                       Column(
                         children: [
                           MyAnswerButton(
-                              isClick: testProvider.isClickAnsw,
-                              trueAnswer: testList[currentIndex].quessAnsw,
-                              buttonName: ListConstants.answerTextList[0],
-                              selectedIndex: 0),
+                            isClick: testProvider.isClickAnsw,
+                            buttonName: ListConstants.answerTextList[0],
+                            backgroundColor: testProvider.btnColorList[0],
+                            onPressed: (){
+                              testProvider.scoreCounter(testList[currentIndex].quessAnsw, ListConstants.answerTextList[0], 0);
+                            } ,
+                          ),
                           context.sized.emptySizedHeightBoxLow,
                           MyAnswerButton(
                               isClick: testProvider.isClickAnsw,
-                              trueAnswer: testList[currentIndex].quessAnsw,
                               buttonName: ListConstants.answerTextList[2],
-                              selectedIndex: 2),
+                              backgroundColor: testProvider.btnColorList[2],
+                              onPressed: (){
+                                testProvider.scoreCounter(testList[currentIndex].quessAnsw, ListConstants.answerTextList[2], 2);
+                              } ,
+                          ),
                         ],
                       ),
                       Column(
                         children: [
                           MyAnswerButton(
-                              isClick: testProvider.isClickAnsw,
-                              trueAnswer: testList[currentIndex].quessAnsw,
-                              buttonName: ListConstants.answerTextList[1],
-                              selectedIndex: 1),
+                            isClick: testProvider.isClickAnsw,
+                            buttonName: ListConstants.answerTextList[1],
+                            backgroundColor: testProvider.btnColorList[1],
+                            onPressed: (){
+                              testProvider.scoreCounter(testList[currentIndex].quessAnsw, ListConstants.answerTextList[1], 1);
+                            } ,
+                          ),
                           context.sized.emptySizedHeightBoxLow,
                           MyAnswerButton(
-                              isClick: testProvider.isClickAnsw,
-                              trueAnswer: testList[currentIndex].quessAnsw,
-                              buttonName: ListConstants.answerTextList[3],
-                              selectedIndex: 3),
+                            isClick: testProvider.isClickAnsw,
+                            buttonName: ListConstants.answerTextList[3],
+                            backgroundColor: testProvider.btnColorList[3],
+                            onPressed: (){
+                              testProvider.scoreCounter(testList[currentIndex].quessAnsw, ListConstants.answerTextList[3], 3);
+                            } ,
+                          ),
                         ],
                       ),
                     ],

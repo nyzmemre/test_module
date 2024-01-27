@@ -64,6 +64,16 @@ class TestViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resfebeScoreCounter(bool isTrue){
+    isClickAnswChange();
+    if(isTrue) {
+      _trueCounter++;
+    } else {
+      _falseCounter++;
+    }
+    notifyListeners();
+  }
+
   void isStopChange() {
     _isStop = !_isStop;
     notifyListeners();

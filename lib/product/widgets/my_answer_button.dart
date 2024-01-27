@@ -8,14 +8,14 @@ class MyAnswerButton extends StatelessWidget {
   MyAnswerButton(
       {Key? key,
       required this.isClick,
-      required this.trueAnswer,
       required this.buttonName,
-      required this.selectedIndex})
+        required this.backgroundColor,
+        required this.onPressed})
       : super(key: key);
   final bool isClick;
-  final String trueAnswer;
   final String buttonName;
-  final int selectedIndex;
+  final Color backgroundColor;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,9 @@ class MyAnswerButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: (isClick)
               ? () {}
-              : () {
-                  Provider.of<TestViewModel>(context, listen: false)
-                      .scoreCounter(trueAnswer, buttonName, selectedIndex);
-                },
+              : onPressed,
           style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  Provider.of<TestViewModel>(context, listen: false)
-                      .btnColorList[selectedIndex]),
+              backgroundColor:backgroundColor),
           child: Text(
             buttonName,
             style: const TextStyle(color: Colors.black),

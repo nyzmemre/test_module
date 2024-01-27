@@ -1,77 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kartal/kartal.dart';
+import 'package:provider/provider.dart';
 import 'package:test_module/features/test/test_model.dart';
-import 'package:test_module/product/widgets/my_scaffold.dart';
+import 'package:test_module/features/test/test_view_model.dart';
 
-
-
-///ithiyaçlar
-///tüm kelimeler girildikten sonra otomatik kontrol devreye girecek (onChanged de denetle, gelen kelime sayısını al. value.lenght e bak)
-///resfebe için model oluştur. gerekirse test modele ekle
-///her soru kalıbı için kolaylaştırılmış ekleme sayfası oluştur.
-///resfebe soruları geldiğinde farklı bir soru tipi çıkacak şekilde test_view de düzenleme yap.
-class ResfebeView extends StatelessWidget {
-  const ResfebeView({Key? key, required this.testList, required this.currentIndex}) : super(key: key);
+class ResfebeView extends StatefulWidget {
+  const ResfebeView({Key? key, required this.testList, required this.currentIndex, required this.isTextFormsPassive}) : super(key: key);
   final List<TestModel> testList;
   final int currentIndex;
+  final bool isTextFormsPassive;
+
+  @override
+  State<ResfebeView> createState() => _ResfebeViewState();
+}
+
+class _ResfebeViewState extends State<ResfebeView> {
+  late List<String> _textFormValues;
+  late List<TextEditingController> _controllerList;
+
+  @override
+  void initState() {
+    super.initState();
+    _textFormValues = List.generate(widget.testList[widget.currentIndex].quessAnsw.length, (index) => '');
+    _controllerList = List.generate(widget.testList[widget.currentIndex].quessAnsw.length, (index) => TextEditingController());
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<TextEditingController> _controllerList=List.generate(testList[currentIndex].quessAnsw.length, (index) => TextEditingController());
     return SizedBox(
-          height: 60,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            physics: ScrollPhysics(),
-            shrinkWrap: true,
-              itemCount: _controllerList.length,
-              itemBuilder: (context, index) {
-            return Row(
-              children: [
-                letterTextForm(context, _controllerList[index], _controllerList),
-                context.sized.emptySizedWidthBoxLow
-              ],
-            );
-          }),
-        );
+      height: 60,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: _controllerList.length,
+        itemBuilder: (context, index) {
+          return Row(
+            children: [
+              letterTextForm(context, index),
+              context.sized.emptySizedWidthBoxLow
+            ],
+          );
+        },
+      ),
+    );
   }
 
-  SizedBox letterTextForm(BuildContext context, TextEditingController controller, List<TextEditingController> controllerList) {
+  SizedBox letterTextForm(BuildContext context, int index) {
     return SizedBox(
-                width: 40,
-                height: 60,
-                child: TextFormField(
-                  controller: controller,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    )),
-                  onChanged: (value) {
-                    if (value.length == 1) {
-                      FocusScope.of(context).nextFocus();//whatever you want to do
-                    checkAnswer(context, controllerList);
-                    }
-                  },
-
-
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(1)
-                  ],
-                ),
-              );
+      width: 40,
+      height: 60,
+      child: TextFormField(
+        controller: _controllerList[index],
+        readOnly: widget.isTextFormsPassive,
+        textCapitalization: TextCapitalization.words,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+        onChanged: (value) {
+          if (value.length == 1) {
+            setState(() {
+              _textFormValues[index] = value;
+            });
+            FocusScope.of(context).nextFocus(); // İstediğiniz işlemi yapın
+            if (_isAllLettersEntered()) {
+              checkAnswer(context);
+            }
+          }
+        },
+        inputFormatters: [LengthLimitingTextInputFormatter(1)],
+      ),
+    );
   }
 
-  void checkAnswer(BuildContext context, List<TextEditingController> controllerList) {
-    String typedWord = '';
-    for (TextEditingController controller in controllerList) {
-      typedWord += controller.text;
-    }
+  bool _isAllLettersEntered() {
+    return _textFormValues.every((element) => element.isNotEmpty);
+  }
 
-    if (typedWord == testList[currentIndex].quessAnsw) {
-      print('true');
+  void checkAnswer(BuildContext context) {
+    String typedWord = _textFormValues.join('');
+
+    if (typedWord == widget.testList[widget.currentIndex].quessAnsw) {
+      Provider.of<TestViewModel>(context, listen: false).resfebeScoreCounter(true);
     } else {
-      print('false');
+      Provider.of<TestViewModel>(context, listen: false).resfebeScoreCounter(false);
     }
+
+    // Kontrol tamamlandıktan sonra geçici değerleri sıfırla
+    setState(() {
+      _textFormValues = List.generate(widget.testList[widget.currentIndex].quessAnsw.length, (index) => '');
+    });
   }
 }
