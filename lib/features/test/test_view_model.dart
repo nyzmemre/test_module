@@ -12,6 +12,9 @@ class TestViewModel extends ChangeNotifier {
   int _falseCounter = 0;
   bool _isStop = false;
   List<Color> _btnColorList = List.generate(4, (index) => ColorConstants.white);
+  List<Color>? _textFormFieldColorList;
+
+
 
   void isClickAnswChange() {
     _isClickAnsw = !_isClickAnsw;
@@ -68,6 +71,8 @@ class TestViewModel extends ChangeNotifier {
     isClickAnswChange();
     if(isTrue) {
       _trueCounter++;
+
+
     } else {
       _falseCounter++;
     }
