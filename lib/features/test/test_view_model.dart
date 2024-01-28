@@ -13,6 +13,7 @@ class TestViewModel extends ChangeNotifier {
   bool _isStop = false;
   List<Color> _btnColorList = List.generate(4, (index) => ColorConstants.white);
   List<Color>? _textFormFieldColorList;
+  List<String>? textFormUserAnswer;
 
 
 
@@ -67,15 +68,35 @@ class TestViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void resfebeScoreCounter(bool isTrue){
+/*  void resfebeScoreCounter(bool isTrue){
     isClickAnswChange();
     if(isTrue) {
       _trueCounter++;
-
-
     } else {
       _falseCounter++;
     }
+
+    notifyListeners();
+  }*/
+   void resfebeScoreCounter(String userAnswer, String trueAnswer){
+    isClickAnswChange();
+    if(userAnswer==trueAnswer) {
+      _trueCounter++;
+    }else {
+      _falseCounter++;
+    }
+    List<String> userAnswerList=userAnswer.split('');
+    List<String> trueAnswerList=trueAnswer.split('');
+    textFormUserAnswer=userAnswerList;
+    _textFormFieldColorList=List.generate(trueAnswer.length, (index) => Colors.transparent);
+    for(int i=0;i<trueAnswerList.length;i++){
+     if(userAnswerList[i]==trueAnswerList[i]){
+       _textFormFieldColorList![i]=Colors.green;
+     }else {
+       _textFormFieldColorList![i]=Colors.red;
+     }
+    }
+
     notifyListeners();
   }
 
@@ -103,4 +124,5 @@ class TestViewModel extends ChangeNotifier {
   bool get isStop => _isStop;
 
   List<Color> get btnColorList => _btnColorList;
+  List<Color>? get textFormFieldColorList => _textFormFieldColorList;
 }

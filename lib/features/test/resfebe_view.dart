@@ -25,33 +25,38 @@ class ResfebeView extends StatelessWidget {
     List<TextEditingController> _controllerList=List.generate(testList[currentIndex].quessAnsw.length, (index) => TextEditingController());
     return SizedBox(
           height: 60,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            physics: ScrollPhysics(),
-            shrinkWrap: true,
-              itemCount: _controllerList.length,
-              itemBuilder: (context, index) {
-            return Row(
-              children: [
-                letterTextForm(context, _controllerList[index], _controllerList),
-                context.sized.emptySizedWidthBoxLow
-              ],
-            );
-          }),
+          child: Consumer<TestViewModel>(
+            builder: (context, providerTest,_) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                  itemCount: _controllerList.length,
+                  itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    letterTextForm(context,  _controllerList, providerTest, index),
+                    context.sized.emptySizedWidthBoxLow
+                  ],
+                );
+              });
+            }
+          ),
         );
   }
 
-  SizedBox letterTextForm(BuildContext context, TextEditingController controller, List<TextEditingController> controllerList) {
+  SizedBox letterTextForm(BuildContext context,  List<TextEditingController> controllerList, TestViewModel providerTest, int index) {
     return SizedBox(
                 width: 40,
                 height: 60,
                 child: TextFormField(
-                  controller: controller,
+                  controller: controllerList[index],
                   readOnly: isTextFormsPassive,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
+                    hintText: providerTest.textFormUserAnswer!=null ? providerTest.textFormUserAnswer![index] : '',
                     filled: true,
-                    fillColor: Colors.green,
+                    fillColor: (providerTest.textFormFieldColorList!=null) ? providerTest.textFormFieldColorList![index] : Colors.transparent,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                     )),
@@ -62,6 +67,7 @@ class ResfebeView extends StatelessWidget {
                       if (_isAllLettersEntered(controllerList)) {
                         checkAnswer(context, controllerList);
                       }
+
                     }
                   },
 
@@ -83,18 +89,28 @@ class ResfebeView extends StatelessWidget {
 
   void checkAnswer(BuildContext context, List<TextEditingController> controllerList) {
     String typedWord = '';
+   // List<Color> colorList=[];
     var testProvider=Provider.of<TestViewModel>(context, listen: false);
     for (TextEditingController controller in controllerList) {
       typedWord += controller.text;
     }
 
-    if (typedWord == testList[currentIndex].quessAnsw) {
-      testProvider.resfebeScoreCounter(true);
+
+      testProvider.resfebeScoreCounter(typedWord, testList[currentIndex].quessAnsw);
 
 
-    } else {
-      testProvider.resfebeScoreCounter(false);
 
+   /* List<String> userAnsw=typedWord.split('');
+    List<String> correctAnsw=testList[currentIndex].quessAnsw.split('');
+    for(int i=0; i<correctAnsw.length;i++){
+
+      if(userAnsw[i]==correctAnsw[i]){
+        colorList.add(Colors.green);
+      }else {
+        colorList.add(Colors.red);
+      }
     }
+    print(colorList);
+*/
   }
 }
