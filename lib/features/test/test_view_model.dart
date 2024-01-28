@@ -13,7 +13,7 @@ class TestViewModel extends ChangeNotifier {
   bool _isStop = false;
   List<Color> _btnColorList = List.generate(4, (index) => ColorConstants.white);
   List<Color>? _textFormFieldColorList;
-  List<String>? textFormUserAnswer;
+  List<String>? _textFormUserAnswer;
 
 
 
@@ -23,9 +23,13 @@ class TestViewModel extends ChangeNotifier {
   }
 
   void increaseIndex() {
+    _textFormFieldColorList=null;
+    _textFormUserAnswer=null;
+    print(_textFormUserAnswer);
     _index++;
     isClickAnswChange();
     _btnColorList = List.generate(4, (index) => ColorConstants.white);
+
     if (isStop) {
       ///bunu yapma sebebim sonraki indexte saniye bilgisinin olup olmadığını bilmememdir.
       ///eğer saniyeli soru değilse burayı isStop false kalmalıdır.
@@ -87,7 +91,7 @@ class TestViewModel extends ChangeNotifier {
     }
     List<String> userAnswerList=userAnswer.split('');
     List<String> trueAnswerList=trueAnswer.split('');
-    textFormUserAnswer=userAnswerList;
+    _textFormUserAnswer=userAnswerList;
     _textFormFieldColorList=List.generate(trueAnswer.length, (index) => Colors.transparent);
     for(int i=0;i<trueAnswerList.length;i++){
      if(userAnswerList[i]==trueAnswerList[i]){
@@ -125,4 +129,5 @@ class TestViewModel extends ChangeNotifier {
 
   List<Color> get btnColorList => _btnColorList;
   List<Color>? get textFormFieldColorList => _textFormFieldColorList;
+  List<String>? get textFormUserAnswer => _textFormUserAnswer;
 }

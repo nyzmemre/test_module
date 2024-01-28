@@ -11,7 +11,7 @@ class LevelViewModel extends ChangeNotifier{
   ];
 
   isTestCompleted(int trueNum, int levelIndex){
-    if(trueNum>_list[levelIndex].quesList.length*.7) {
+    if(trueNum>_list[levelIndex].quesList.length*.6) {
       _list[levelIndex].isCompleted=true;
 
     }
