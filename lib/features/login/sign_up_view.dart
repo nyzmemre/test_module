@@ -49,7 +49,7 @@ class _SignUpViewState extends State<SignUpView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text(TextConstant.signUp, style: Theme.of(context).textTheme.headlineMedium,),
+                    Text(TextConstant.signUp, style: Theme.of(context).textTheme.headlineMedium,),
                     context.sized.emptySizedHeightBoxLow,
                     CustomTextFormField(
                       controller: nameCtrl,
@@ -96,28 +96,28 @@ class _SignUpViewState extends State<SignUpView> {
                               provider.buttonClickChange();
                               if (_key.currentState!.validate()) {
 
-await _loginViewModel.createUser(context, emailCtrl.text, passwordCtrl.text);
+                                await _loginViewModel.createUser(context, emailCtrl.text, passwordCtrl.text);
 
 
-  await _loginViewModel
-      .registerUserAndAddToFirestore(
-      context: context,
-      userName: nameCtrl.text,
-      userSurname: surnameCtrl.text,
-      email: emailCtrl.text,
-      password: passwordCtrl.text,
-      classGrade: 1
+                                await _loginViewModel
+                                    .registerUserAndAddToFirestore(
+                                    context: context,
+                                    userName: nameCtrl.text,
+                                    userSurname: surnameCtrl.text,
+                                    email: emailCtrl.text,
+                                    password: passwordCtrl.text,
+                                    classGrade: 1
 
-  );
+                                );
 
 
-                                } else {
-                                  MotionToast.error(
-                                    title: const Text(TextConstant.beCareful),
-                                    description: const Text(TextConstant.isInfoTrue),
-                                    position: MotionToastPosition.center,
-                                  ).show(context);
-                                }
+                              } else {
+                                MotionToast.error(
+                                  title: const Text(TextConstant.beCareful),
+                                  description: const Text(TextConstant.isInfoTrue),
+                                  position: MotionToastPosition.center,
+                                ).show(context);
+                              }
 
 
 

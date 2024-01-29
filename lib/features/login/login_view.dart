@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
@@ -62,8 +63,8 @@ class LoginView extends StatelessWidget {
                   context.sized.emptySizedHeightBoxLow,
                   ElevatedButton(onPressed: ()async{
                     await LoginViewModel().singIn(context, _emailCtrl.text, _passwordCtrl.text);
+                    print(FirebaseAuth.instance.currentUser?.email);
 
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>HomePageView()), (route) => false);
 
                   }, child: Text(TextConstant.signIn)),
                   context.sized.emptySizedHeightBoxLow,

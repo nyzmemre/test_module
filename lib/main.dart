@@ -5,6 +5,7 @@ import 'package:test_module/features/homepage/homepage_view.dart';
 import 'package:test_module/features/homepage/homepage_view_model.dart';
 import 'package:test_module/features/level/level_view.dart';
 import 'package:test_module/features/level/level_view_model.dart';
+import 'package:test_module/features/login/login_view.dart';
 import 'package:test_module/features/test/resfebe_view.dart';
 import 'package:test_module/firebase_options.dart';
 
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  LevelView(),
+      home:  LoginView(),
     );
   }
 }

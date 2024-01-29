@@ -8,7 +8,7 @@ class LoginServices {
 
   Future<void> createUser(String email, String password) async {
     try {
-     await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == TextConstant.passwordWeak) {
@@ -24,9 +24,10 @@ class LoginServices {
     return user?.uid;
   }
 
-  Future<void> singIn(String email, String password) async {
+  Future<UserCredential> singIn(String email, String password, ) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      final UserCredential userCredential=await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       throw e;
     }
