@@ -10,9 +10,64 @@ class MyLevelExam extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CustomPaint(
-          painter: MyPaint(),
-          size: Size(context.sized.width,context.sized.height),
+        child: Stack(
+          children: [
+            CustomPaint(
+              painter: MyPaint(),
+              size: Size(context.sized.width,context.sized.height),
+            ),
+            Positioned(
+                left: context.sized.width*.15,
+                top: context.sized.height*.05-15,
+                child: Container(
+                  child: Center(child: Text('1', style: TextStyle(color: Colors.white))),
+                  width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.blueAccent,
+              ),
+            )),
+
+            Positioned(
+                left: context.sized.width*.55,
+                top: context.sized.height*.05-15,
+                child: Container(
+                  child: Center(child: Text('2', style: TextStyle(color: Colors.white))),
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.blueAccent,
+              ),
+            )),
+
+            Positioned(
+                left: context.sized.width*.55,
+                top: context.sized.height*.2-15,
+                child: Container(
+                  child: Center(child: Text('3', style: TextStyle(color: Colors.white))),
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.blueAccent,
+              ),
+            )),
+
+            Positioned(
+                left: context.sized.width*.3,
+                top: context.sized.height*.2-15,
+                child: Container(
+                  child: Center(child: Text('4', style: TextStyle(color: Colors.white))),
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.blueAccent,
+              ),
+            )),
+          ],
         ),
       ));
   }
@@ -27,11 +82,24 @@ class MyPaint extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
   final path=Path();
-  path.moveTo(size.width*.2, size.height*.2);
+
+  path.moveTo(size.width*.1, size.height*.05);
+  path.lineTo(size.width*.6, size.height*.05);
   path.arcToPoint(
-    Offset(size.width*.2, size.height * .6,),
-    radius: Radius.circular(50)
+    Offset(size.width*.6, size.height * .2,),
+    radius: Radius.circular(20)
   );
+    path.lineTo(size.width*.3, size.height*.2);
+    path.arcToPoint(
+      Offset(size.width*.3, size.height*.4),
+        radius: Radius.circular(20),
+clockwise: false    );
+    path.lineTo(size.width*.6, size.height*.4);
+    path.arcToPoint(
+      Offset(size.width*.6, size.height*.6),
+      radius: Radius.circular(20)
+    );
+    path.lineTo(size.width*.3, size.height*.6);
 
    //path.lineTo(300, 400); // Sağa doğru çizgi
    //path.cubicTo(350, 400, 300, 350, 250, 300);
