@@ -6,6 +6,8 @@ import 'package:test_module/features/homepage/homepage_view_model.dart';
 import 'package:test_module/features/level/level_view.dart';
 import 'package:test_module/features/level/level_view_model.dart';
 import 'package:test_module/features/level_map/level_map_view.dart';
+import 'package:test_module/features/level_map/my_level_draw.dart';
+import 'package:test_module/features/level_map/snake_path_painter.dart';
 import 'package:test_module/features/login/login_view.dart';
 import 'package:test_module/features/test/resfebe_view.dart';
 import 'package:test_module/firebase_options.dart';
@@ -50,7 +52,7 @@ class MyApp extends StatelessWidget {
                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  LevelMapView(),
+      home:  MyLevelExam(),
     );
   }
 }
