@@ -64,7 +64,8 @@ class _LevelMapViewState extends State<LevelMapView> {
                 width: context.sized.width, //* 15,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/appImage/river2_bg.png'),
+
+                    image: AssetImage('assets/appImage/levelImage/river2_bg.png'),
                     fit: BoxFit.fill,
                   ),
                   color: Colors.white,
@@ -83,7 +84,7 @@ class _LevelMapViewState extends State<LevelMapView> {
                 width: context.sized.width*.2,
                 height: context.sized.width*.2,
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage('assets/appImage/ship.png'), fit: BoxFit.fill)
+                    image: DecorationImage(image: AssetImage('assets/appImage/levelImage/ship.png'), fit: BoxFit.fill)
                   )
                 ),
               ),
