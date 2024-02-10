@@ -7,29 +7,82 @@ class LevelMapView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const List<bool> _isLock=[false, false, true,true,true,true,true,true,true,true,];
+    const List<bool> _isLock = [
+      false, false, false, false, false, false, true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,true, true, true, true,
+    ];
     return SafeArea(
         child: Scaffold(
-      body: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-          ),
-          itemCount: 10,
-          itemBuilder: (context, int index) {
-            return SizedBox(
-              child: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            ImagePaths.levelImagePath+'level_bg.png'))),
-                child: Padding(
-                  padding: context.padding.normal,
-                  child: Center(
-                      child: Image.asset((_isLock[index]) ? ImagePaths.levelImagePath+'lock.png': ImagePaths.levelImagePath+'star.png')),
+
+      body: Container(
+        width: context.sized.width,
+        height: context.sized.height,
+        padding: context.padding.normal,
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  ImagePaths.levelBackgroundImagePath,
                 ),
+                fit: BoxFit.cover),
+        color: Colors.blue),
+        child: Column(
+          children: [
+
+            Expanded(
+              child: Container(
+                //width: context.sized.width * .9,
+                //height: context.sized.height* .4,
+                padding: context.padding.low,
+                //alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white.withOpacity(.6),
+              
+                ),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1.0
+              
+                    ),
+                    itemCount: 44,
+                    itemBuilder: (context, int index) {
+                      return levelBgContainer(context, _isLock, index);
+                    }),
               ),
-            );
-          }),
+            ),
+            Container(
+              width: context.sized.width*.5,
+              height: context.sized.height*.1,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(ImagePaths.rectButtonImagePath))
+              ),
+            ),
+          ],
+        ),
+      ),
     ));
+  }
+
+  Widget levelBgContainer(BuildContext context, List<bool> _isLock, int index) {
+    return Padding(
+      padding: context.padding.low,
+      child: Container(
+        width: context.sized.width * .3,
+        height: context.sized.height*0.2,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(ImagePaths.levelBgImagePath))),
+        child: Padding(
+          padding: context.padding.normal,
+          child: Center(
+              child: Image.asset((_isLock[index])
+                  ? ImagePaths.lockImagePath
+                  : ImagePaths.starImagePath)),
+        ),
+      ),
+    );
   }
 }
