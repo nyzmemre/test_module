@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:test_module/features/leaderboard/leader_board_view.dart';
-import 'package:test_module/features/level_map/level_map_view.dart';
-import 'package:test_module/features/options/settings_view.dart';
-import 'package:test_module/features/profile/profile_view.dart';
-import 'package:test_module/product/utility/constants/image_paths.dart';
-import 'package:test_module/product/widgets/my_scaffold.dart';
+import '../leaderboard/leader_board_view.dart';
+import '../level_map/level_map_view.dart';
+import '../options/settings_view.dart';
+import '../profile/profile_view.dart';
+import '../../product/utility/constants/image_paths.dart';
+import '../../product/utility/constants/text_constant.dart';
+import '../../product/widgets/my_scaffold.dart';
 
 class HomePageView extends StatelessWidget {
   const HomePageView({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class HomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<int> levelList=List.generate(20, (index) => index);
     return MyScaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
           title: Text('HomePage'),
-        ),
+        ),*/
         child: Center(child:SingleChildScrollView(
       child: Container(
         height: context.sized.height,
@@ -25,7 +26,7 @@ class HomePageView extends StatelessWidget {
         ),
         child: Column(
           children:[
-
+context.sized.emptySizedHeightBoxHigh,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -60,10 +61,10 @@ class HomePageView extends StatelessWidget {
                    // width: context.sized.width-context.sized.width*.2,
                     child: Column(
                       children: [
-                        levelWideButtonWidget(context, 'Başla', LevelMapView()),
-                        levelWideButtonWidget(context, 'Profil', ProfileView()),
-                        levelWideButtonWidget(context, 'Puanlar', LeaderBoardView()),
-                        levelWideButtonWidget(context, 'Ayarlar', SettingsView()),
+                        levelWideButtonWidget(context, TextConstant.startTEXT, const LevelMapView()),
+                        levelWideButtonWidget(context, TextConstant.profileTEXT, const ProfileView()),
+                        levelWideButtonWidget(context, TextConstant.pointsTEXT, const LeaderBoardView()),
+                        levelWideButtonWidget(context, TextConstant.settingsTEXT, const SettingsView()),
                       ],
                     ),
                   )
@@ -85,7 +86,7 @@ class HomePageView extends StatelessWidget {
       child: Container(
                         width: context.sized.width*.5,
                           padding: context.padding.normal,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(image: AssetImage(ImagePaths.levelWideButtonBg))
                           ),
                         child: Text(buttonText, textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 30),),

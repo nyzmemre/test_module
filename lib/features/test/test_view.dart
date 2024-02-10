@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
-import 'package:test_module/features/level/level_model.dart';
 import 'package:test_module/features/test/resfebe_view.dart';
 import 'package:test_module/features/test/test_model.dart';
 import 'package:test_module/features/test/test_questions/attention_questions.dart';
@@ -14,6 +13,7 @@ import 'package:test_module/product/widgets/my_scaffold.dart';
 import 'package:test_module/product/widgets/my_test_true_false_bar.dart';
 import 'package:test_module/product/widgets/my_tip_button.dart';
 
+import '../ex_level/level_model.dart';
 import '../result/result_view.dart';
 import 'test_view_model.dart';
 

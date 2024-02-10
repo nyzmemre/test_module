@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:test_module/features/homepage/homepage_view.dart';
 import 'package:test_module/features/homepage/homepage_view_model.dart';
-import 'package:test_module/features/level/level_view.dart';
-import 'package:test_module/features/level/level_view_model.dart';
 import 'package:test_module/features/level_map/level_bg_exam.dart';
 import 'package:test_module/features/level_map/ex_level_map_view.dart';
 import 'package:test_module/features/level_map/level_sc.dart';
@@ -16,6 +14,7 @@ import 'package:test_module/firebase_options.dart';
 
 
 import 'package:test_module/features/login/login_view_model.dart';
+import 'features/ex_level/level_view_model.dart';
 import 'features/level_map/level_map_view.dart';
 import 'firebase_options.dart';
 import 'features/mascot/mascot_view.dart';

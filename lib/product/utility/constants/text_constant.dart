@@ -24,6 +24,13 @@ class TextConstant{
   static const String or='----- Veya -----';
 
 
+  ///buttons text
+  static const String startTEXT='Başla';
+  static const String profileTEXT='Profil';
+  static const String pointsTEXT='Puanlar';
+  static const String settingsTEXT='Ayarlar';
+
+
 
 
 
