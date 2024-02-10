@@ -77,7 +77,7 @@ class LevelMapView extends StatelessWidget {
             width: context.sized.width*.5,
             height: context.sized.height*.1,
             decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(ImagePaths.rectButtonImagePath), )
+                image: DecorationImage(image: AssetImage(ImagePaths.levelWideButtonBg), )
             ),
           );
   }
