@@ -20,7 +20,7 @@ class MascotView extends StatelessWidget {
       const MyMascotWidget(text: TextConstant.mascotText1),
           SizedBox(
               height: 300,
-              child: Image.asset(ImagePaths.mascotImage)),
+              child: Image.asset(ImagePaths.mascotImagePath)),
           context.sized.emptySizedHeightBoxNormal,
           ElevatedButton(onPressed: (){
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>LoginView()), (route) => false);

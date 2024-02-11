@@ -46,7 +46,7 @@ class StudentInfoPageBasic extends StatelessWidget {
         MyMascotWidget(text: mascotText),
         Expanded(
             flex: 1,
-            child: Image.asset(ImagePaths.mascotImage)),
+            child: Image.asset(ImagePaths.mascotImagePath)),
       ],
     );
   }

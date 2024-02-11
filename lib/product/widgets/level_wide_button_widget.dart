@@ -18,7 +18,7 @@ class LevelWideButtonWidget extends StatelessWidget {
         width: context.sized.width*.5,
         padding: context.padding.normal,
         decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage(ImagePaths.levelWideButtonBg))
+            image: DecorationImage(image: AssetImage(ImagePaths.levelWideButtonBgPath))
         ),
         child: Text(buttonText, textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 30),),
         //  child: Image.asset(ImagePaths.levelWideButtonBg)
