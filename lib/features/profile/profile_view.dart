@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kartal/kartal.dart';
+import 'package:test_module/product/utility/constants/image_paths.dart';
 import 'package:test_module/product/widgets/my_scaffold.dart';
 
 class ProfileView extends StatelessWidget {
@@ -7,7 +9,19 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(child: Center(
-      child: Text('My Profile'),
+      child: SingleChildScrollView(
+        child: Container(
+          height: context.sized.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(ImagePaths.levelBgImagePath), fit: BoxFit.fill)
+          ),
+          child: Column(
+            children: [
+              
+            ],
+          ),
+        ),
+      ),
     ));
   }
 }

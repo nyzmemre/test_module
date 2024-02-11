@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:test_module/product/widgets/level_wide_button_widget.dart';
 import '../leaderboard/leader_board_view.dart';
 import '../level_map/level_map_view.dart';
 import '../options/settings_view.dart';
@@ -13,7 +14,7 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<int> levelList=List.generate(20, (index) => index);
+
     return MyScaffold(
         /*appBar: AppBar(
           title: Text('HomePage'),
@@ -47,6 +48,7 @@ context.sized.emptySizedHeightBoxHigh,
             ),
             Container(
               padding: context.padding.normal,
+              margin: context.padding.low,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(.2),
                 borderRadius: BorderRadius.circular(20)
@@ -61,13 +63,12 @@ context.sized.emptySizedHeightBoxHigh,
                    // width: context.sized.width-context.sized.width*.2,
                     child: Column(
                       children: [
-                        levelWideButtonWidget(context, TextConstant.startTEXT, const LevelMapView()),
-                        levelWideButtonWidget(context, TextConstant.profileTEXT, const ProfileView()),
-                        levelWideButtonWidget(context, TextConstant.pointsTEXT, const LeaderBoardView()),
-                        levelWideButtonWidget(context, TextConstant.settingsTEXT, const SettingsView()),
-                      ],
-                    ),
-                  )
+                     LevelWideButtonWidget(buttonText: TextConstant.startTEXT,  page: LevelMapView(),),
+                   LevelWideButtonWidget(buttonText: TextConstant.profileTEXT, page: ProfileView()),
+                  LevelWideButtonWidget(buttonText: TextConstant.pointsTEXT, page: LeaderBoardView()),
+                 LevelWideButtonWidget(buttonText: TextConstant.settingsTEXT, page:SettingsView())
+
+
                 ],
               ),
             ),
@@ -75,10 +76,10 @@ context.sized.emptySizedHeightBoxHigh,
 
           ]
           ),
-      ))));
+      )])))));
   }
 
-  Widget levelWideButtonWidget(BuildContext context, String buttonText, Widget page) {
+  /*Widget levelWideButtonWidget(BuildContext context, String buttonText, Widget page) {
     return InkWell(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (_)=>page));
@@ -94,5 +95,5 @@ context.sized.emptySizedHeightBoxHigh,
 
                       ),
     );
-  }
+  }*/
 }
